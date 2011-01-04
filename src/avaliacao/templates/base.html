@@ -48,10 +48,10 @@
                             <span><a href="#">{% trans 'Submissions' %}</a></span>
                             <big></big>
                         </div>
-                        <div class="userData_block">
+                        <!--div class="userData_block">
                             <span><a href="url ticket.index">{% trans 'Tickets' %}</a></span>
                             <big>user.get_profile.amount_tickets</big>
-                        </div>
+                        </div-->
                         <div class="userData_block">
                             <ul>
                                 <li><a href="url reviewapp.userhome">{% trans 'Profile' %}</a></li>
@@ -108,12 +108,12 @@
                             <li><a href="url assistance.faq">{% trans "Help" %}</a></li>
                         </ul>
                     </div>
-                    <div class="search">
+                    <!--div class="search">
                         <form action="url repository.list_all" method="get">
                             <input type="text" name="q" class="textEntry" id="search" onblur="this.className = 'textEntry';" onfocus="this.className = 'textEntry textEntryFocus';" />
                             <input type="submit" class="submit" value="{% trans 'Search' %}" />
                         </form>
-                    </div>
+                    </div-->
                 </div>
                 {% endblock %}
                 <div class="spacer">&#160;</div>
@@ -121,7 +121,25 @@
             {% block stepmenu_top %}{% endblock %}
             <div class="middle">
                 <div class="sideBar">
-                    {% block sidebar %}{% endblock %}
+                    {% block sidebar %}
+                        {% if user.is_authenticated %}
+
+                         <div class="menu">
+                            <ul>
+                                <li><a href="#" title="{% trans 'New Submission' %}">Logado</a></li>
+                            </ul>
+                        </div>
+
+                        {% else %}
+
+                        <div class="menu">
+                            <ul>
+                                <li><a href="#" title="{% trans 'New Submission' %}">Não logado</a></li>
+                            </ul>
+                        </div>
+                        
+                        {% endif %}
+                    {% endblock %}
                 </div>
                 <div class="mainContent">
                     {% block body %}{% endblock %}

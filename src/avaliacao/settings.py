@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-# Django settings for SciELO Avaliação project.
+# Django settings for SciELO Evaluation project.
 
 import os
 
@@ -17,11 +17,11 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'avaliacao',                      # Or path to database file if using sqlite3.
+        'NAME': 'evaluation',                      # Or path to database file if using sqlite3.
         'USER': 'root',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
+        'PASSWORD': 'sophiaamor',                  # Not used with sqlite3.
         'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
 
@@ -115,10 +115,5 @@ TEMPLATE_CONTEXT_PROCESSORS =(
 )
 
 #AUTH_PROFILE_MODULE = "reviewapp.UserProfile"
-
-#################################################################
-### BEGIN SciELO Avaliacao customization settings
-###
-### see also settings_local-SAMPLE.py for private customization settings.
 
 FIXTURE_DIRS = ('fixtures',)

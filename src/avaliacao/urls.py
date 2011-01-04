@@ -1,9 +1,11 @@
 from django.conf.urls.defaults import *
 
 import utilities
+
 from avaliacao.tickets.views import index
 
 from django.contrib import admin
+
 admin.autodiscover()
 
 urlpatterns = patterns('',

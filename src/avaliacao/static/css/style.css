@@ -175,6 +175,7 @@ blockquote {
 .userData .userData_block {
     float: left;
     margin: 0px 8px 0px 12px;
+    text-transform:uppercase;
 }
 .userData .userData_block, .userData .userData_block A {
     color:#0c4762;
@@ -191,12 +192,12 @@ blockquote {
 }
 .userData .userData_block UL {
     margin: 0px 0px 0px 12px;
-    padding: 18px 0px 0px 0px;
+    padding:4px 0 0;
 }
 .userData .logout {
     width: 80px;
     height: 29px;
-    margin-top: 12px;
+    margin-top: 6px;
 }
 
 .userData .logout A {
@@ -303,10 +304,10 @@ blockquote {
 
 .sideBar {
     float: left;
-    background-color: red;
     width: 150px;
     margin: 10px;
     padding: 10px;
+    border:2px solid #ACC0C9;
 }
 
 .sideBar .highlights ul{
@@ -323,9 +324,10 @@ blockquote {
 }
 
 .wide .middle .mainContent {
-    border: none;
-    margin-right: 0em;
-    padding-right: 0em;
+    border:medium none;
+    float:right;
+    margin-right:36px;
+    width:85%;
 }
 
 .mainContent .warning {
