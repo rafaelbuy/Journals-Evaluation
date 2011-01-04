@@ -481,7 +481,7 @@ table.dataTable, table.dataTable td {
 }
 table.dataTable td {
     font-family: arial;
-    font-size: 80%;
+    font-size: 100%;
     line-height: 120%;
     vertical-align: top;
 }
@@ -571,7 +571,7 @@ table.trialsummary {
     text-decoration: none;
     text-align: center;
     text-transform: uppercase;
-    font-size: 80%;
+    font-size: 100%;
 }
 .showAll:hover, .addNew:hover {
     background: url(../images/button_showAllHover.gif) no-repeat;
