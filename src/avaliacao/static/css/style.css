@@ -325,8 +325,8 @@ blockquote {
 
 .wide .middle .mainContent {
     border:medium none;
-    float:right;
-    margin-right:36px;
+    float:left;
+    margin-left:76px;
     width:85%;
 }
 
@@ -799,4 +799,8 @@ legend{
 }
 .barra_MSaude .barra1000 DIV a span  {
     display: none;
+}
+
+.table{
+    width: 100%;
 }
