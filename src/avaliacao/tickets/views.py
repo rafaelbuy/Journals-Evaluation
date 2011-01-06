@@ -124,15 +124,22 @@ def accept_ticket(request, object_id):
 
 @login_required
 def new_iteration(request, object_id):
+    
+    #get the ticket by id
     ticket = get_object_or_404(Ticket, id=int(object_id))
 
-    if request.method == 'POST': # If the forms were submitted...
+    if request.method == 'POST':
+        
+        #instance of form
         form = FollowupParcForm(request.POST)
         if form.is_valid():
+
             desc = form.cleaned_data['description']
             fw_lt = ticket.followup_set.latest()
+
+            #Criate a new iteration with information
             fw_nw = Followup(ticket=ticket, status=fw_lt.status,
-                description=desc, subject=fw_lt.subject ,
+                description=desc, subject=fw_lt.subject,
                 reported_by=fw_lt.reported_by, to_user=fw_lt.to_user, )
             fw_nw.save()
 
@@ -147,28 +154,53 @@ def new_iteration(request, object_id):
         'mode': 'newiteration'},
        context_instance=RequestContext(request))
 
+
+#class to represent the form
 class FollowupParcBForm(forms.Form):
-    subject = forms.CharField(label=_('Subject'),required=True,max_length=256)
-    description = forms.CharField(label=_('Description'),required=True ,widget=forms.Textarea)
+    subject = forms.CharField(label=_('Subject'), required=True, max_length=256)
+    description = forms.CharField(label=_('Description'), required=True, widget=forms.Textarea)
+
 
 @login_required
 def open_ticket(request,context,type):
-    if request.method == 'POST': # If the forms were submitted...
-        form = FollowupParcBForm(request.POST)
+    if request.method == 'POST':
+
+        #instance of form
+        form = FollowupParcBForm(request.POST, request.FILES)
+        
         if form.is_valid():
+
+            #Get the user and create a new ticket
             user =  request.user
-            ticket = Ticket(context=context,type=type, creator=user, )
+            ticket = Ticket(context=context, type=type, creator=user, )
             ticket.save()
+            
+            #get the data from the form 
             subject = form.cleaned_data['subject']
             description = form.cleaned_data['description']
+
+            #create a new followup 
             fw_nw = Followup(ticket=ticket , status='new',
                 description=description, subject=subject ,
                 reported_by=request.user, )
             fw_nw.save()
 
-        return HttpResponseRedirect(ticket.get_absolute_url())
+            return HttpResponseRedirect(ticket.get_absolute_url())
+        else:
+             #FIXME this must have the error message
+             #recovering Ticket Data to input form fields
+            open_ticket_form = FollowupParcBForm() # An unbound form
+            
+            return render_to_response('tickets/open_ticket.html', {
+                'open_ticket_form': open_ticket_form,
+                'context': context,
+                'type': type,
+                'mode': 'open_ticket',
+                'user_name': request.user.pk},
+                context_instance=RequestContext(request))
     else:
-        # recovering Ticket Data to input form fields
+
+        #recovering Ticket Data to input form fields
         open_ticket_form = FollowupParcBForm() # An unbound form
 
     return render_to_response('tickets/open_ticket.html', {

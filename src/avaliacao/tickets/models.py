@@ -64,6 +64,7 @@ class Ticket(models.Model):
                 self.followup_set.filter(status="close").select_related())
 
 class Followup(models.Model):
+
     ticket = models.ForeignKey(Ticket, db_index=True)
     iteration_date = models.DateTimeField(_('Date of Iteration'), db_index=True,
         editable=False, )
