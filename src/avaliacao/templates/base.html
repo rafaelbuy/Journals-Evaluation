@@ -24,7 +24,7 @@
                         </ul>
                     </div>
                     <div class="identification">
-                        <h1><a href="#">{% trans 'Avaliação SciELO' %}</a></h1>
+                        <h1><a href="#">{% trans 'SciELO Evaluation' %}</a></h1>
                     </div>
                 </div>
                 {% block login %}
@@ -94,6 +94,7 @@
                     {% endif %}
                     <div class="topMenu">
                         <ul>
+                            <li><a href="{% url ticket.user_index %}">{% trans 'Tickets' %}</a></li>
                             <li><a href="url reviewapp.newslist">{% trans "News" %}</a></li>
                             <li><a href="/about/">{% trans "About" %}</a></li>
                             <li><a href="url assistance.faq">{% trans "Help" %}</a></li>
@@ -110,14 +111,15 @@
                 <div class="spacer">&#160;</div>
             </div>
             <div class="middle">
-
+<!--
                     {% block sidebar %}
                     <div class="sideBar">
+                        
                         {% if user.is_authenticated %}
 
                          <div class="menu">
                             <ul>
-                                <li><a href="#" title="{% trans 'New Submission' %}">Logado</a></li>
+                                <a href="{% url ticket.user_index %}">{% trans 'Tickets' %}</a>
                             </ul>
                         </div>
 
@@ -132,7 +134,7 @@
                         {% endif %}
                     </div>
                     {% endblock %}
-
+-->
                 <div class="mainContent">
                     {% block stepmenu_top %}{% endblock %}
                     {% block body %}{% endblock %}

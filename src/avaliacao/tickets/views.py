@@ -133,8 +133,11 @@ def new_iteration(request, object_id):
         #instance of form
         form = FollowupParcForm(request.POST)
         if form.is_valid():
-
+            
+            #get the descruption from the form
             desc = form.cleaned_data['description']
+            
+            #get the last followup inserted
             fw_lt = ticket.followup_set.latest()
 
             #Criate a new iteration with information
