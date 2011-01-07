@@ -476,6 +476,11 @@ form table.odd td {
     background-color: #EFFFEF;
 }
 
+
+.table{
+    width: 100%;
+}
+
 table.dataTable, table.dataTable td {
     color:#333;
 }
@@ -799,8 +804,4 @@ legend{
 }
 .barra_MSaude .barra1000 DIV a span  {
     display: none;
-}
-
-.table{
-    width: 100%;
 }

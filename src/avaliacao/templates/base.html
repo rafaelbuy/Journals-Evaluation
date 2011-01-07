@@ -4,7 +4,7 @@
     {% load i18n %}
     <head>
         <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8"/>
-        <title>{% block page_title %}{% trans "Clinical Trials Platform" %}{% endblock %}</title>
+        <title>{% block page_title %}{% trans "SciELO Evaluation" %}{% endblock %}</title>
         <link rel="shortcut icon" href="/static/favicon.ico"/>
         <link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
 
@@ -35,11 +35,11 @@
                             <span>{% trans 'Username' %}</span>
                             <big>{{ user.username }}</big>
                         </div>
-                        <div class="userData_block">
+                        <!--div class="userData_block">
                             <span><a href="#">{% trans 'Submissions' %}</a></span>
                             <big></big>
                         </div>
-                        <!--div class="userData_block">
+                        <div class="userData_block">
                             <span><a href="url ticket.index">{% trans 'Tickets' %}</a></span>
                             <big>user.get_profile.amount_tickets</big>
                         </div-->
@@ -111,7 +111,7 @@
                 <div class="spacer">&#160;</div>
             </div>
             <div class="middle">
-<!--
+                    <!--
                     {% block sidebar %}
                     <div class="sideBar">
                         
@@ -134,7 +134,7 @@
                         {% endif %}
                     </div>
                     {% endblock %}
--->
+                    -->
                 <div class="mainContent">
                     {% block stepmenu_top %}{% endblock %}
                     {% block body %}{% endblock %}
