@@ -1,8 +1,7 @@
 # Create your views here.
-from django.template import Context, loader
+from django.template import loader
 from django.template.context import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
-from django.contrib.auth.models import User
 from django.forms.models import inlineformset_factory
 from django.http import HttpResponseRedirect, HttpResponse
 from django import forms
@@ -10,7 +9,10 @@ from django.utils.translation import ugettext as _
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
-from avaliacao.tickets.models import Ticket, Followup
+
+
+from avaliacao.tickets.models import Ticket, Followup, Media
+
 import choices
 
 
@@ -89,14 +91,11 @@ def resolve_ticket(request, object_id):
             
         return HttpResponseRedirect(ticket.get_absolute_url())
     else:
-        # recovering Ticket Data to input form fields
-        followup_form = FollowupParcForm() # An unbound form
-        return render_to_response('tickets/new_iteration.html', {
-            'form': followup_form,
-            'ticket': ticket,
-            'mode': 'resolve',
-            'username': request.user.username,
-        },context_instance=RequestContext(request))
+        form = FollowupParcForm()
+        forms = dict(form_followup=form, mode = 'resolve', ticket=ticket,
+        username=request.user.username)
+        return render_to_response('tickets/new_iteration.html', forms,
+                                context_instance=RequestContext(request))
 
 @login_required
 def accept_ticket(request, object_id):
@@ -125,43 +124,60 @@ def accept_ticket(request, object_id):
 @login_required
 def new_iteration(request, object_id):
     
-    #get the ticket by id
+    #get the ticket by id or 404 error
     ticket = get_object_or_404(Ticket, id=int(object_id))
 
+    #method POST
     if request.method == 'POST':
+
+        #Create the set of media
+        MediaInlineSet = inlineformset_factory(Followup, Media, extra=3)
         
-        #instance of form
-        form = FollowupParcForm(request.POST)
-        if form.is_valid():
+        forms_media = MediaInlineSet(request.POST, request.FILES)
+
+        form_followup = FollowupParcForm(request.POST, request.FILES)
             
+        if form_followup.is_valid():
             #get the descruption from the form
-            desc = form.cleaned_data['description']
-            
+            desc = form_followup.cleaned_data['description']
+
             #get the last followup inserted
             fw_lt = ticket.followup_set.latest()
 
-            #Criate a new iteration with information
+            #Create a new iteration with information
             fw_nw = Followup(ticket=ticket, status=fw_lt.status,
                 description=desc, subject=fw_lt.subject,
                 reported_by=fw_lt.reported_by, to_user=fw_lt.to_user, )
             fw_nw.save()
+            
+            if forms_media.is_valid():
+                forms_media.save()
 
         return HttpResponseRedirect(ticket.get_absolute_url())
     else:
-        # recovering Ticket Data to input form fields
-        iteration_form = FollowupParcForm() # An unbound form
 
-    return render_to_response('tickets/new_iteration.html', {
-        'form': iteration_form,
-        'ticket': ticket,
-        'mode': 'newiteration'},
-       context_instance=RequestContext(request))
+        #create the form for Followup
+        form_followup = FollowupParcForm()
+
+        #object NAMEInLineSet
+        #about http://docs.djangoproject.com/en/dev/topics/forms/modelforms/
+        MediaInlineSet = inlineformset_factory(Followup, Media, extra=3,
+        can_delete=False)
+
+        #create the form for Media
+        forms_media = MediaInlineSet()
+        
+        forms = dict(form_followup=form_followup, forms_media=forms_media,
+                                mode = 'newiteration', ticket=ticket)
+        return render_to_response('tickets/new_iteration.html', forms,
+                                context_instance=RequestContext(request))
 
 
 #class to represent the form
 class FollowupParcBForm(forms.Form):
     subject = forms.CharField(label=_('Subject'), required=True, max_length=256)
-    description = forms.CharField(label=_('Description'), required=True, widget=forms.Textarea)
+    description = forms.CharField(label=_('Description'), required=True,
+                                                    widget=forms.Textarea)
 
 
 @login_required
