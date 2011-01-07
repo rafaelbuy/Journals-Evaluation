@@ -78,6 +78,9 @@ class Followup(models.Model):
         choices=choices.TICKET_STATUS, default=choices.TICKET_STATUS[0][0],
         db_index=True, )
 
+    def __unicode__(self):
+        return u'%s' % (self.id)
+
     class Meta:
         get_latest_by = 'iteration_date'
 
