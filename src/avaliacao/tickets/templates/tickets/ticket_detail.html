@@ -68,6 +68,9 @@
             <td>{{ fw.status }}</td>
             <td>{{ fw.description }}</td>
             <td>{{ fw.to_user }}</td>
+            {% for me in fw.media_set.all %}
+                {{ me.file }}
+            {% endfor %}
         </tr>
         {% endfor %}
     </table>

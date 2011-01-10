@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 from django.views.generic.list_detail import object_detail, object_list
-from tickets.models import Ticket, Followup
+from tickets.models import Ticket, Followup, Media
 from tickets.views import *
 
 info_dict = {
