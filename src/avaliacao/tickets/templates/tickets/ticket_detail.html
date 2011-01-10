@@ -23,7 +23,7 @@
                 <th>{% trans "Subject" %}</th>
                 <th>{% trans "Status" %}</th>
                 <th>{% trans "Last update" %}</th>
-                <th>{% trans "Mark as" %}</th>
+                <!--th>{% trans "Mark as" %}</th-->
             </tr>
             <tr>
                 <td>{{ object.created }}</td>
@@ -32,7 +32,7 @@
                 <td>{{ object.followup_set.latest.subject }}</td>
                 <td>{{ object.followup_set.latest.status }}</td>
                 <td>{{ object.followup_set.latest.iteration_date }}</td>
-                <td>
+                <!--td>
                     <ul>
                         {% if object.is_closed or object.is_resolved %}
                         <li><a href="/ticket/reopen/{{ object.pk }}/">{% trans "reopen" %}</a></li>
@@ -44,7 +44,7 @@
                         <li><a href="/ticket/close/{{ object.pk }}/">{% trans "closed" %}</a></li>
                         {% endif %} {% endif %}
                     </ul>
-                </td>
+                </td-->
             </tr>
         </table>
     {% else %}
@@ -61,16 +61,19 @@
             <th>{% trans "Status" %}</th>
             <th>{% trans "Description" %}</th>
             <th>{% trans "Assigned to" %}</th>
+            <th>{% trans "Files" %}</th>
         </tr>
         {% for fw in object.followup_set.all %}
         <tr>
             <td>{{ fw.iteration_date }}</td>
             <td>{{ fw.status }}</td>
-            <td>{{ fw.description }}</td>
+            <td width="30%" style="text-align: justify;">{{ fw.description }}</td>
             <td>{{ fw.to_user }}</td>
-            {% for me in fw.media_set.all %}
-                {{ me.file }}
-            {% endfor %}
+                <td>
+                {% for med in fw.ticket_media.all %}
+                    <a href="/static/{{ med.file }}">{{med.file}}</a><br/>
+                {% endfor %}
+                </td>
         </tr>
         {% endfor %}
     </table>

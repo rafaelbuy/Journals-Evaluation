@@ -124,9 +124,7 @@ def new_iteration(request, object_id):
     
     #get the ticket by id or 404 error
     ticket = get_object_or_404(Ticket, id=int(object_id))
-
-    #get the followup by id or 404 error
-    followup = get_object_or_404(Followup, id=int(object_id))
+    
 
     #check method POST
     if request.method == 'POST':
@@ -134,12 +132,14 @@ def new_iteration(request, object_id):
         #create the set of media
         MediaInlineSet = inlineformset_factory(Followup, Media, extra=3)
         
-        forms_media = MediaInlineSet(request.POST, request.FILES, instance=followup)
+        #forms_media = MediaInlineSet(request.POST, request.FILES, instance=followup)
 
+        #form_followup = FollowupParcForm(request.POST, request.FILES)
+        
         form_followup = FollowupParcForm(request.POST, request.FILES)
-            
+
         if form_followup.is_valid():
-            
+
             #get the descruption from the form
             desc = form_followup.cleaned_data['description']
 
@@ -150,6 +150,9 @@ def new_iteration(request, object_id):
             fw_nw = Followup(ticket=ticket, status=fw_lt.status,
                 description=desc, subject=fw_lt.subject,
                 reported_by=fw_lt.reported_by, to_user=fw_lt.to_user, )
+
+            forms_media = MediaInlineSet(request.POST, request.FILES, instance=fw_nw)
+
             fw_nw.save()
             
             if forms_media.is_valid():

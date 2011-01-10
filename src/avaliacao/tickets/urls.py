@@ -18,4 +18,5 @@ urlpatterns = patterns('',
     url(r'^accept/(?P<object_id>\d+)/$', accept_ticket, name='ticket.accept' ),
     url(r'^close/(?P<object_id>\d+)/$', close_ticket, name='ticket.close' ),
     url(r'^newiteration/(?P<object_id>\d+)/$', new_iteration, name='ticket.new_iteration' ),
+
 )
