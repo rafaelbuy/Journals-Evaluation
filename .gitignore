@@ -1,3 +1,4 @@
-django-env
+src/avaliacao/static/*
+src/avaliacao/settings.py
 nbproject
 *.pyc
