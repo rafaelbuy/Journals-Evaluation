@@ -85,7 +85,7 @@
                         </div>
                         <div class="loginOption">
                             <ul>
-                                <li><a href="" title="{% trans 'Forgot password?' %}">{% trans 'Forgot password?' %}</a></li>
+                                <li><a href="/accounts/password/reset" title="{% trans 'Forgot password?' %}">{% trans 'Forgot password?' %}</a></li>
                                 <li><a href="/accounts/register" title="{% trans 'create an account to submit trial records' %}">{% trans 'Register' %}</a></li>
                             </ul>
                         </div>
@@ -94,7 +94,7 @@
                     {% endif %}
                     <div class="topMenu">
                         <ul>
-                            <li><a href="{% url ticket.user_index %}">{% trans 'Tickets' %}</a></li>
+                             {% if user.is_authenticated %}<li><a href="{% url ticket.user_index %}">{% trans 'Tickets' %}</a></li>{% endif %}
                             <li><a href="url reviewapp.newslist">{% trans "News" %}</a></li>
                             <li><a href="/about/">{% trans "About" %}</a></li>
                             <li><a href="url assistance.faq">{% trans "Help" %}</a></li>

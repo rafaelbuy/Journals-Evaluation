@@ -224,7 +224,7 @@ blockquote {
 
 /* TOP MENU */
 .topMenu {
-    float: right;
+    float: left;
     margin: 19px 70px 0px 8px;
 }
 .topMenu UL {
@@ -319,7 +319,6 @@ blockquote {
     float: left;
     margin-right: 4em;
     padding-right: 2em;
-    border-right: 1px solid #d7d7d7;
     min-height: 349px;
 }
 
