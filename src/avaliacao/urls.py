@@ -21,12 +21,12 @@ urlpatterns = patterns('',
     
     url(r'^accounts/password/reset/$', password_reset, {
         'template_name': 'registration/password_reset_form.html',
-        'email_template_name': 'registration/password_reset_email.txt',
+        'email_template_name': 'registration/password_reset_email.html',
         'post_reset_redirect': '/accounts/password/reset/done/'},
         name='registration.password_reset'),
         
     url(r'^accounts/password/reset/done/$', password_reset_done, 
-        {'template_name': 'reviewapp/password_reset_done.html'},
+        {'template_name': 'registration/password_reset_done.html'},
         name='registration.password_reset_done'),
         
     url(r'^$', index, name="avaliacao.ticket.index"),

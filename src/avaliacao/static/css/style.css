@@ -171,6 +171,7 @@ blockquote {
 /* USER DATA */
 .userData {
     margin-left: 10px;
+    width:400px;
 }
 .userData .userData_block {
     float: left;
@@ -198,6 +199,7 @@ blockquote {
     width: 80px;
     height: 29px;
     margin-top: 6px;
+    float: right;
 }
 
 .userData .logout A {
@@ -298,7 +300,8 @@ blockquote {
     width: 60%;
 }
 .middle {
-    margin: 10px auto 0px auto;
+    /*margin: 10px auto 0px auto;*/
+    margin:10px 10px 0;
     min-height: 349px;
 }
 

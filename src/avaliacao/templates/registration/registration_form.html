@@ -3,6 +3,11 @@
 
 {% block body %}
 
+<small>
+    / <a href="{% url avaliacao.ticket.index %}">{% trans 'Home' %}</a>
+</small>
+<big>/ {% trans 'Register' %}</big>
+
 {% if form.errors %}
     <p>{% trans "Please correct the errors below." %}</p>
 {% endif %}
