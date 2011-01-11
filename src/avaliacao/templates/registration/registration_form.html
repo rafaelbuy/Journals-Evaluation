@@ -21,11 +21,4 @@
     <input type="submit" value="{% trans "register" %}" />
 </form>
 
-{% if form.email.data %}
-    {% if form.email.errors %}
-        <h3>{% trans "If this email belongs to you," %}
-        {% trans "click here" %}</a> {% trans "to retrieve your username and password." %}</h3>
-    {% endif %}
-{% endif %}
-
 {% endblock %}

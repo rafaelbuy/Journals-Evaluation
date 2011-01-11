@@ -1,5 +1,6 @@
 from django.conf.urls.defaults import *
 from django.contrib.auth.views import password_reset, password_reset_done
+from django.contrib.auth.views import password_reset_complete, password_reset_confirm
 from avaliacao.tickets.views import index
 from django.contrib import admin
 
@@ -28,6 +29,15 @@ urlpatterns = patterns('',
     url(r'^accounts/password/reset/done/$', password_reset_done, 
         {'template_name': 'registration/password_reset_done.html'},
         name='registration.password_reset_done'),
+
+    url(r'^accounts/password/reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', password_reset_confirm, {
+       'template_name': 'registration/password_reset_confirm.html',
+        'post_reset_redirect': '/accounts/password/reset/complete/'},
+        name='registration.password_reset_confirm'),
+
+    url(r'^accounts/password/reset/complete/$', password_reset_complete,
+        {'template_name': 'registration/password_reset_complete.html'},
+        name='registration.password_reset_complete'),
         
     url(r'^$', index, name="avaliacao.ticket.index"),
 
