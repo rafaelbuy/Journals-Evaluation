@@ -100,11 +100,6 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'avaliacao.urls'
 ACCOUNT_ACTIVATION_DAYS = 2
-#EMAIL_HOST = 'esmeralda.bireme.br'
-#EMAIL_PORT = 25
-#EMAIL_HOST_USER = 'appscielo'
-#EMAIL_HOST_PASSWORD = 'x@07sci@'
-#DEFAULT_FROM_EMAIL = 'scielo@bireme.org'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'suporte.aplicacao@scielo.org'
