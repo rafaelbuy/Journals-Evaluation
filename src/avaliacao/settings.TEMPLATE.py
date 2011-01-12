@@ -2,10 +2,16 @@
 # Django settings for SciELO Evaluation project.
 
 import os
+gettext = lambda s: s
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
+SITE_ROOT = os.path.dirname(os.path.abspath(__file__)) 
+
+LOCALE_PATHS = (     
+    os.path.join(PROJECT_PATH, 'locale')
+)
 
 ADMINS = (
     ('Fabio Batalha', 'fabio.batalha@scielo.org'),
@@ -43,6 +49,15 @@ SITE_ID = 1
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
+
+MANAGED_LANGUAGES_CHOICES = (
+  (u'en', gettext(u'English')),
+  (u'es', gettext(u'Español')),
+  (u'pt-BR', gettext(u'Portuguese')),
+)
+
+TARGET_LANGUAGES = MANAGED_LANGUAGES_CHOICES[1:]
+MANAGED_LANGUAGES = [code for code, label in MANAGED_LANGUAGES_CHOICES]
 
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale
@@ -84,7 +99,20 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'avaliacao.urls'
+ACCOUNT_ACTIVATION_DAYS = 2
+#EMAIL_HOST = 'esmeralda.bireme.br'
+#EMAIL_PORT = 25
+#EMAIL_HOST_USER = 'appscielo'
+#EMAIL_HOST_PASSWORD = 'x@07sci@'
+#DEFAULT_FROM_EMAIL = 'scielo@bireme.org'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'suporte.aplicacao@scielo.org'
+EMAIL_HOST_PASSWORD = 'iPhepae2'
+DEFAULT_FROM_EMAIL = 'suporte.aplicacao@scielo.org'
+EMAIL_USE_TLS = True
 LOGIN_REDIRECT_URL = '/ticket'
+
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -92,6 +120,7 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(PROJECT_PATH, 'templates'),
 )
+
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -105,6 +134,7 @@ INSTALLED_APPS = (
     #'django.contrib.staticfiles',
     'tickets',
     'registration',  # django-registration package
+    'rosetta',
     )
 
 TEMPLATE_CONTEXT_PROCESSORS =(
@@ -113,7 +143,5 @@ TEMPLATE_CONTEXT_PROCESSORS =(
     'django.core.context_processors.csrf',
     'django.core.context_processors.media',
 )
-
-#AUTH_PROFILE_MODULE = "reviewapp.UserProfile"
 
 FIXTURE_DIRS = ('fixtures',)
