@@ -6,14 +6,34 @@
         <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8"/>
         <title>{% block page_title %}{% trans "SciELO Evaluation" %}{% endblock %}</title>
         <link rel="shortcut icon" href="/static/favicon.ico"/>
-        <link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
-
+        <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/style.css"/>
+        <!--Script-->
         <script type="text/javascript" type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-
+        <script type="text/javascript" src="{{ MEDIA_URL }}js/languages.js"></script>
+        <!--Script-->
         {% block extrahead %}{% endblock %}
     </head>
     <body>
         <div class="{% block container_class %}container wide{% endblock %}">
+            <div id="bar_top">
+               <div class="languages">
+                   <form name="form_language" id="form_language" action="/i18n/setlang/" method="post">
+                   <ul>
+                       {% csrf_token %}
+                       <input type="hidden" id="language" name="language">
+                        <li><a id="lang_pt-BR" href="javascript: void(0)" title="Alterar o idioma para Português">
+                        {% if request.LANGUAGE_CODE == 'pt-br' %}<span class="selected_language">Português</span>{% else %}Português{% endif %}
+                        </a></li>
+                        <li><a id="lang_es" href="javascript: void(0)" title="Cambiar el idioma a Español">
+                        {% if request.LANGUAGE_CODE == 'es' %}<span class="selected_language">Español</span>{% else %}Español{% endif %}
+                        </a></li>
+                        <li><a id="lang_en" href="javascript: void(0)" title="Change language to English">
+                        {% if request.LANGUAGE_CODE == 'en' %}<span class="selected_language">English</span>{% else %}English{% endif %}
+                        </a></li>
+                   </ul>
+                   </form>
+               </div>
+           </div>
             <div class="top">
                 <div class="banner">
                     <div class="institutions">
@@ -149,5 +169,5 @@
                 </p>
             </div>
         </div>
-    </body>
+    </body>   
 </html>

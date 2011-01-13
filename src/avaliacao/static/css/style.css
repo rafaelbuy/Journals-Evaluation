@@ -76,6 +76,13 @@ blockquote {
     padding-top: 15px;
     position: relative;
 }
+
+#bar_top {
+   background-color: #0C4762;
+   height:30px;
+   width:100%;
+}
+ 
 .identification {
     position: absolute;
     /*top: 4em;*/
@@ -806,4 +813,34 @@ legend{
 }
 .barra_MSaude .barra1000 DIV a span  {
     display: none;
+}
+
+.languages {
+   float: right;
+   margin: 5px 12px 0px 2px;
+}
+.languages UL {
+   margin: 0px;
+   padding: 0px;
+}
+.languages LI {
+   display: inline;
+   padding: 0px 8px 0px 4px;
+}
+.languages LI:last-child {
+   border-right: none;
+}
+.languages A {
+   color: #cccccc;
+   xfont-weight: bold;
+   text-decoration: none;
+       font-size:12px;
+}
+.languages A:hover {
+   color: #fffff;
+}
+
+.selected_language {
+   font-weight: bold;
+   text-decoration: underline;
 }

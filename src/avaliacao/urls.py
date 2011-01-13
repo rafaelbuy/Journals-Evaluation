@@ -41,6 +41,8 @@ urlpatterns = patterns('',
         
     url(r'^$', index, name="avaliacao.ticket.index"),
 
+    (r'^i18n/', include('django.conf.urls.i18n')),
+
 )
 
 from django.conf import settings
