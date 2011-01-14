@@ -25,7 +25,7 @@ DATABASES = {
         'ENGINE': 'mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'evaluation',                      # Or path to database file if using sqlite3.
         'USER': 'root',                      # Not used with sqlite3.
-        'PASSWORD': 'sophiaamor',                  # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -137,6 +137,7 @@ TEMPLATE_CONTEXT_PROCESSORS =(
     'django.core.context_processors.i18n',
     'django.core.context_processors.csrf',
     'django.core.context_processors.media',
+    'django.core.context_processors.request',
 )
 
 FIXTURE_DIRS = ('fixtures',)
