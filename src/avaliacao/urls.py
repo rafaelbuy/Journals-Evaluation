@@ -8,6 +8,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 
+    url(r'^$', index, name="avaliacao.ticket.index"),
+
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
@@ -38,8 +40,6 @@ urlpatterns = patterns('',
     url(r'^accounts/password/reset/complete/$', password_reset_complete,
         {'template_name': 'registration/password_reset_complete.html'},
         name='registration.password_reset_complete'),
-        
-    url(r'^$', index, name="avaliacao.ticket.index"),
 
     (r'^i18n/', include('django.conf.urls.i18n')),
 
