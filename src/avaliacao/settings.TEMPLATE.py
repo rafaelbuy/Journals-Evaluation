@@ -50,13 +50,13 @@ SITE_ID = 1
 # to load the internationalization machinery.
 USE_I18N = True
 
-MANAGED_LANGUAGES_CHOICES = (
-  (u'en', gettext(u'English')),
-  (u'es', gettext(u'Español')),
-  (u'pt-BR', gettext(u'Portuguese')),
-)
 
-TARGET_LANGUAGES = MANAGED_LANGUAGES_CHOICES[1:]
+MANAGED_LANGUAGES_CHOICES = (
+	(u'en', gettext(u'English')),
+    	(u'es', gettext(u'Español')),
+	(u'pt-BR', gettext(u'Portuguese')),
+)
+TARGET_LANGUAGES = MANAGED_LANGUAGES_CHOICES[1:] # exlude source language
 MANAGED_LANGUAGES = [code for code, label in MANAGED_LANGUAGES_CHOICES]
 
 # If you set this to False, Django will not format dates, numbers and
@@ -67,7 +67,6 @@ USE_L10N = True
 # Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT  = os.path.join(PROJECT_PATH, 'static')
 STATIC_ROOT = os.path.join(PROJECT_PATH, 'static')
-
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -95,6 +94,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
 
@@ -126,9 +126,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.flatpages',
-    #'django.contrib.staticfiles',
     'tickets',
-    'registration',  # django-registration package
+    'registration',
     'rosetta',
     )
 
