@@ -20,7 +20,7 @@
                    <form name="form_language" id="form_language" action="/i18n/setlang/" method="post">
                    <ul>
                        {% csrf_token %}
-                       <input type="hidden" id="language" name="language">
+                        <input type="hidden" id="language" name="language">
                         <li><a id="lang_pt-BR" href="javascript: void(0)" title="Alterar o idioma para Português">
                         {% if request.LANGUAGE_CODE == 'pt-br' %}<span class="selected_language">Português</span>{% else %}Português{% endif %}
                         </a></li>
@@ -44,7 +44,9 @@
                         </ul>
                     </div>
                     <div class="identification">
-                        <h1><a href="/">{% trans 'SciELO Journal Evaluation' %}</a></h1>
+                       {% if request.LANGUAGE_CODE == 'pt-br' %}<img  src="/static/images/logo_pt.png" alt="{% trans 'SciELO Journal Evaluation' %}"/>{% endif %}
+                       {% if request.LANGUAGE_CODE == 'es' %}<img  src="/static/images/logo_es.png" alt="{% trans 'SciELO Journal Evaluation' %}"/>{% endif %}
+                       {% if request.LANGUAGE_CODE == 'en' %}<img  src="/static/images/logo_en.png" alt="{% trans 'SciELO Journal Evaluation' %}"/>{% endif %}
                     </div>
                 </div>
                 {% block login %}
