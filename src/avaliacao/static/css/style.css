@@ -66,8 +66,8 @@ blockquote {
 /*TOP BANNER*/
 .top {
     background: url(../images/top_bg.jpg) repeat-x;
-    border-bottom: 2px solid #acc0c9;
-    height: 90px;
+    /* border-bottom: 2px solid #acc0c9; */
+    height: 144px;
 }
 
 .top .banner {
@@ -78,7 +78,7 @@ blockquote {
 }
 
 #bar_top {
-   background-color: #0C4762;
+   background-color: #BFBFBF;
    height:30px;
    width:100%;
 }
@@ -91,13 +91,14 @@ blockquote {
 .identification H1 {
     margin: 0px 0px 0px 40px;
     clear: both;
-    padding-top: 12px;
-    font-size: 250%;
+    padding-top: 10px;
+    font-size: 200%;
     font-weight: normal;
+	margin-left: 76px;
 }
 
 .identification H1 A {
-    color: #0c4762;
+    color: #990000;
     text-decoration: none;
 }
 .institutions UL {
@@ -128,7 +129,7 @@ blockquote {
     width: 480px;
     padding: 0px;
     margin-right: 10px;
-    background: url(../images/login_bg.jpg) no-repeat;
+    background: url(../images/login_bg.png) no-repeat;
 }
 
 /* LOGIN */
@@ -255,7 +256,7 @@ blockquote {
     text-decoration: none;
 }
 .topMenu LI A:hover {
-    color: #ff0000;
+    text-decoration: underline;
 }
 .search {
     margin-top: 18px;
@@ -330,6 +331,7 @@ blockquote {
     margin-right: 4em;
     padding-right: 2em;
     min-height: 349px;
+	margin-left: 76px;
 }
 
 .wide .middle .mainContent {
@@ -519,7 +521,7 @@ table.dataTable TH, table.dataTable TD {
 }
 
 table.dataTable TH {
-    color: #0c4762;
+    color: #990000;
     font-size: 120%;
     background: #dedede;
     font-size: 110%;
@@ -701,7 +703,7 @@ table.trialsummary {
     margin-top: 20px;
     padding: 5px;
     border-width: 1px 0 0;
-    background:#0c4762;
+    background: url(../images/footer_bg.jpg) repeat-x;
     font-size:80%;
 
 }
@@ -712,7 +714,7 @@ table.trialsummary {
 
 }
 #footer, #footer a {
-    color:#FFF;
+    color:#000000;
 }
 #footer a{
     text-decoration:underline;
@@ -749,6 +751,7 @@ td.showdecs div.decstool {
 fieldset{
     border: 1px solid #CCC;
     margin-bottom:30px;
+	background: #F8F7F7;
 }
 
 label{
@@ -761,6 +764,7 @@ ul li{
 
 legend{
     font-weight:bold;
+	color: #990000;
 }
 
 #content a.buttonadd {
@@ -817,6 +821,7 @@ legend{
 
 .languages {
    float: right;
+   width: 200px;
    margin: 5px 12px 0px 2px;
 }
 .languages UL {
@@ -831,7 +836,7 @@ legend{
    border-right: none;
 }
 .languages A {
-   color: #cccccc;
+   color: #000000;
    xfont-weight: bold;
    text-decoration: none;
        font-size:12px;
