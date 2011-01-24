@@ -76,16 +76,23 @@ blockquote {
     padding-top: 15px;
     position: relative;
 }
+
+#bar_top {
+   background-color: #0C4762;
+   height:30px;
+   width:100%;
+}
+ 
 .identification {
     position: absolute;
-    top: 4em;
+    /*top: 4em;*/
     left: 0;
 }
 .identification H1 {
     margin: 0px 0px 0px 40px;
     clear: both;
     padding-top: 12px;
-    font-size: 200%;
+    font-size: 250%;
     font-weight: normal;
 }
 
@@ -118,7 +125,7 @@ blockquote {
 }
 .topRight {
     float: right;
-    width: 440px;
+    width: 480px;
     padding: 0px;
     margin-right: 10px;
     background: url(../images/login_bg.jpg) no-repeat;
@@ -171,10 +178,12 @@ blockquote {
 /* USER DATA */
 .userData {
     margin-left: 10px;
+    width:400px;
 }
 .userData .userData_block {
     float: left;
     margin: 0px 8px 0px 12px;
+    text-transform:uppercase;
 }
 .userData .userData_block, .userData .userData_block A {
     color:#0c4762;
@@ -191,12 +200,13 @@ blockquote {
 }
 .userData .userData_block UL {
     margin: 0px 0px 0px 12px;
-    padding: 18px 0px 0px 0px;
+    padding:4px 0 0;
 }
 .userData .logout {
     width: 80px;
     height: 29px;
-    margin-top: 12px;
+    margin-top: 6px;
+    float: right;
 }
 
 .userData .logout A {
@@ -285,7 +295,7 @@ blockquote {
 }
 /* MIDDLE */
 .wide .middle {
-    width: 90%;
+    width: 100%;
 }
 .middle .leftCol, .middle .rightCol {
     float: left;
@@ -297,24 +307,36 @@ blockquote {
     width: 60%;
 }
 .middle {
-    width: 75%;
-    margin: 20px auto 0px auto;
-    min-height: 349px;
+    /*margin: 10px auto 0px auto;*/
+    margin:10px 0px 0;
+    min-height: 390px;
 }
+
+.sideBar {
+    float: left;
+    width: 150px;
+    margin: 10px;
+    padding: 10px;
+    border:2px solid #ACC0C9;
+}
+
+.sideBar .highlights ul{
+    margin: 0px;
+    padding: 0px;
+}
+
 .middle .mainContent {
     float: left;
-    width: 70%;
-    margin-right: 2em;
+    margin-right: 4em;
     padding-right: 2em;
-    border-right: 1px solid #d7d7d7;
     min-height: 349px;
 }
 
 .wide .middle .mainContent {
-    border: none;
-    width: 100%;
-    margin-right: 0em;
-    padding-right: 0em;
+    border:medium none;
+    float:left;
+    margin-left:76px;
+    width:85%;
 }
 
 .mainContent .warning {
@@ -463,12 +485,17 @@ form table.odd td {
     background-color: #EFFFEF;
 }
 
+
+.table{
+    width: 100%;
+}
+
 table.dataTable, table.dataTable td {
     color:#333;
 }
 table.dataTable td {
     font-family: arial;
-    font-size: 80%;
+    font-size: 100%;
     line-height: 120%;
     vertical-align: top;
 }
@@ -558,7 +585,7 @@ table.trialsummary {
     text-decoration: none;
     text-align: center;
     text-transform: uppercase;
-    font-size: 80%;
+    font-size: 100%;
 }
 .showAll:hover, .addNew:hover {
     background: url(../images/button_showAllHover.gif) no-repeat;
@@ -786,4 +813,34 @@ legend{
 }
 .barra_MSaude .barra1000 DIV a span  {
     display: none;
+}
+
+.languages {
+   float: right;
+   margin: 5px 12px 0px 2px;
+}
+.languages UL {
+   margin: 0px;
+   padding: 0px;
+}
+.languages LI {
+   display: inline;
+   padding: 0px 8px 0px 4px;
+}
+.languages LI:last-child {
+   border-right: none;
+}
+.languages A {
+   color: #cccccc;
+   xfont-weight: bold;
+   text-decoration: none;
+       font-size:12px;
+}
+.languages A:hover {
+   color: #fffff;
+}
+
+.selected_language {
+   font-weight: bold;
+   text-decoration: underline;
 }

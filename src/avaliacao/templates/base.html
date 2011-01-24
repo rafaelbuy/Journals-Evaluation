@@ -6,7 +6,7 @@
         <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8"/>
         <title>{% block page_title %}{% trans "SciELO Evaluation" %}{% endblock %}</title>
         <link rel="shortcut icon" href="/static/favicon.ico"/>
-        <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/style_sci.css"/>
         <!--Script-->
         <script type="text/javascript" type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
         <script type="text/javascript" src="{{ MEDIA_URL }}js/languages.js"></script>
@@ -117,9 +117,9 @@
                     <div class="topMenu">
                         <ul>
                              {% if user.is_authenticated %}<li><a href="{% url ticket.user_index %}">{% trans 'Tickets' %}</a></li>{% endif %}
-                            <li><a href="url reviewapp.newslist">{% trans "News" %}</a></li>
+                            <li><a href="/news/">{% trans "News" %}</a></li>
                             <li><a href="/about/">{% trans "About" %}</a></li>
-                            <li><a href="url assistance.faq">{% trans "Help" %}</a></li>
+                            <li><a href="/help/">{% trans "Help" %}</a></li>
                         </ul>
                     </div>
                     <!--div class="search">
