@@ -3,33 +3,29 @@
 
 {% block stepmenu_top %}
     {{ block.super }}
-    <small>
-        / <a href="{% url ticket.user_index %}">{% trans 'Tickets' %}</a>
-    </small>
-    <big>/ {% trans 'Open Ticket' %}</big>
+    / <a href="{% url ticket.user_index %}">{% trans 'Ingress' %}</a> / {% trans 'Open Ingress' %}
+    <br/><br/>
 {% endblock %}
 
 {% block body %}
-
-<h2>{% trans "Opening Ticket" %} {{ user_name }}</h2>
+<h2>{% trans "New Ingress" %}</h2>
+<br/>
 <form method="post" action="/ticket/open/{{ context }}/{{ type }}/">{% csrf_token %}
     <table class="table">
-        <col width="15%"/>
+        <col width="10%"/>
         <col width="85%"/>
 
-        <tr>
+        <!--tr>
             <th>Context:</th>
             <td>{{ context }}</td>
         </tr>
         <tr>
             <th>Type:</th>
             <td>{{ type }}</td>
-        </tr>
+        </tr-->
         
         {{open_ticket_form.as_table}}
     </table>
-
-    <input name="submit" type="submit" value="{% trans "Submit" %}">
+<input class="addNew" name="submit" type="submit" value="{% trans "Add Ingress" %}">
 </form>
-
 {% endblock %}

@@ -72,7 +72,8 @@ def close_ticket(request, object_id):
     return HttpResponseRedirect(ticket.get_absolute_url())
 
 class FollowupParcForm(forms.Form):
-    description = forms.CharField(label=_('Description'),widget=forms.Textarea)
+    description = forms.CharField(label=_('Description'),widget=forms.Textarea(
+                                    attrs={'rows':'15','cols':'70',}))
 
 @login_required
 def resolve_ticket(request, object_id):
@@ -180,9 +181,15 @@ def new_iteration(request, object_id):
 
 #class to represent the form
 class FollowupParcBForm(forms.Form):
-    subject = forms.CharField(label=_('Subject'), required=True, max_length=256)
+    title_journal = forms.CharField(label=_('Journal Title'), required=True, max_length=256,
+                                widget=forms.TextInput(attrs={'size':'30',}))
+    institution = forms.CharField(label=_('Institution'), required=True, max_length=512,
+                                widget=forms.TextInput(attrs={'size':'40',}))
+    issn = forms.CharField(label=_('ISSN'), required=True, max_length=9,
+                                widget=forms.TextInput(attrs={'size':'10',}))
     description = forms.CharField(label=_('Description'), required=True,
-                                                    widget=forms.Textarea)
+                                widget=forms.Textarea(attrs={'rows':'15',
+                                'cols':'70',}))
 
 
 @login_required
@@ -196,16 +203,20 @@ def open_ticket(request,context,type):
 
             #Get the user and create a new ticket
             user =  request.user
-            ticket = Ticket(context=context, type=type, creator=user, )
+            institution = form.cleaned_data['institution']
+            issn = form.cleaned_data['issn']
+            ticket = Ticket(context=context, type=type, creator=user,
+                    institution=institution, issn=issn )
             ticket.save()
             
             #get the data from the form 
-            subject = form.cleaned_data['subject']
+            subject = form.cleaned_data['title_journal']
             description = form.cleaned_data['description']
+            #institution = form.cleaned_data['institution']
 
             #create a new followup 
             fw_nw = Followup(ticket=ticket , status='new',
-                description=description, subject=subject ,
+                description=description, subject=subject,
                 reported_by=request.user, )
             fw_nw.save()
 

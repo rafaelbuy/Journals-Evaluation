@@ -3,10 +3,8 @@
 
 {% block stepmenu_top %}
     {{ block.super }}
-    <small>
-        / <a href="{% url ticket.user_index %}">{% trans 'Tickets' %}</a>
-    </small>
-    <big>/ {% trans 'Add iteration' %}</big>
+        / <a href="{% url ticket.user_index %}">{% trans 'Ingress' %}</a>
+    / {% trans 'Add iteration' %}
 {% endblock %}
 
 {% block body %}
@@ -27,26 +25,26 @@
                 <th>{% trans "Date of Registration" %}</th>
                 <td>{{ ticket.created }}</td>
             </tr>
-            <tr>
+            <!--tr>
                 <th>{% trans "Context" %}</th>
                 <td>{{ ticket.context }}</td>
             </tr>
             <tr>
                 <th>{% trans "Ticket Type" %}</th>
                 <td>{{ ticket.type }}</td>
-            </tr>
+            </tr-->
             {{ form_followup }}
         </table>
       </fieldset>
 
     {% if not mode == "resolve" %}
       <fieldset>
-        <legend>{% trans 'Iteration text' %}</legend>
+        <legend>{% trans 'Iteration File' %}</legend>
         <table>
             {{ forms_media }}
         </table>
       </fieldset>
     {% endif %}
-    <input type="submit" value="Enviar">
+    <input class="addNew" type="submit" value="{% trans "Add Iteration" %}">
 </form>
 {% endblock %}

@@ -7,6 +7,10 @@ body {
     background: #FFF;
 }
 
+a{
+    text-decoration: none;
+}
+
 P {
     font-family: arial;
 }
@@ -67,7 +71,7 @@ blockquote {
 .top {
     background: url(../images/top_bg.jpg) repeat-x;
     /* border-bottom: 2px solid #acc0c9; */
-    height: 144px;
+    height: 117px;
 }
 
 .top .banner {
@@ -527,7 +531,7 @@ table.dataTable TH {
     font-size: 110%;
 }
 table.dataTable .even TD {
-    background: #f5f5f5;
+    /*background: #f5f5f5;*/
 }
 table.dataTable .odd TD {
     background: #EFEFEF;
@@ -586,8 +590,9 @@ table.trialsummary {
     color: #7d7d7d;
     text-decoration: none;
     text-align: center;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     font-size: 100%;
+    border:medium none;
 }
 .showAll:hover, .addNew:hover {
     background: url(../images/button_showAllHover.gif) no-repeat;

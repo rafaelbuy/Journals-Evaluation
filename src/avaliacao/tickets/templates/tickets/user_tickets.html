@@ -22,19 +22,20 @@ $(document).ready(function() {
 
 {% block stepmenu_top %}
     {{ block.super }}
-    <big>/ {% trans 'Tickets' %}</big>
 {% endblock %}
 
 {% block body %}
 
-<div class="actions"><a href="{% url ticket.open 'general' 'task'%}" class="addNew">{% trans 'New Ticket' %}</a></div>
+<div class="actions"><a href="{% url ticket.open 'general' 'task'%}" class="addNew">{% trans 'New Ingress' %}</a></div>
 <table class="dataTable" id="table_tickets" cellspacing="0" border="0">
     <thead>
     <tr>
         <th>{% trans "Date" %}</th>
+        <th>{% trans "Journal Title" %}</th>
+        <th>{% trans "Institution" %}</th>
+        <th>{% trans "ISSN" %}</th>
         <th>{% trans "Context" %}</th>
         <th>{% trans "Type" %}</th>
-        <th>{% trans "Subject" %}</th>
         <th>{% trans "Status" %}</th>
         <th>{% trans "Updated" %}</th>
         <th></th>
@@ -44,9 +45,12 @@ $(document).ready(function() {
 {% for ct in user_tickets %}
     <tr class="{% cycle 'even' 'odd' %}">
         <td class="date">{{ ct.created|date:'Y/m/d H:i' }}</td>
+        <td class="subject">{{ ct.followup_set.latest.subject }}</td>
+        <td class="subject">{{ ct.institution }}</td>
+        <td>{{ ct.issn }}</td>
         <td>{{ ct.context }}</td>
         <td>{{ ct.type }}</td>
-        <td class="subject">{{ ct.followup_set.latest.subject }}</td>
+
         <td>{{ ct.followup_set.latest.status }}</td>
         <td class="update">{{ ct.followup_set.latest.iteration_date|date:'Y/m/d H:i' }}</td>
         <td>

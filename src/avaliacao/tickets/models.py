@@ -17,6 +17,8 @@ class Ticket(models.Model):
         choices=choices.TICKET_CONTEXT, default=choices.TICKET_CONTEXT[0][0], )
     type = models.CharField(_('Ticket Type'), max_length=256,
         choices=choices.TICKET_TYPE, default=choices.TICKET_TYPE[0][0], )
+    institution = models.CharField(_('Institution'), max_length=512,)
+    issn = models.CharField(_('Institution'), max_length=9,)
 
     @models.permalink
     def get_absolute_url(self):
