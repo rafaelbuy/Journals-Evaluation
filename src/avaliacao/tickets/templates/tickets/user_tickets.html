@@ -26,18 +26,18 @@ $(document).ready(function() {
 
 {% block body %}
 
-<div class="actions"><a href="{% url ticket.open 'general' 'task'%}" class="addNew">{% trans 'New Ingress' %}</a></div>
+<div class="actions"><a href="{% url ticket.open %}" class="addNew">{% trans 'New Ingress' %}</a></div>
 <table class="dataTable" id="table_tickets" cellspacing="0" border="0">
     <thead>
     <tr>
         <th>{% trans "Date" %}</th>
+        <th>{% trans "ISSN" %}</th>
         <th>{% trans "Journal Title" %}</th>
         <th>{% trans "Institution" %}</th>
-        <th>{% trans "ISSN" %}</th>
-        <th>{% trans "Context" %}</th>
-        <th>{% trans "Type" %}</th>
-        <th>{% trans "Status" %}</th>
-        <th>{% trans "Updated" %}</th>
+        <th>{% trans "Process" %}</th>
+        <th>{% trans "Description" %}</th>
+        <th>{% trans "User" %}</th>
+        <!--th>{% trans "Status" %}</th-->
         <th></th>
     </tr>
     </thead>
@@ -45,14 +45,14 @@ $(document).ready(function() {
 {% for ct in user_tickets %}
     <tr class="{% cycle 'even' 'odd' %}">
         <td class="date">{{ ct.created|date:'Y/m/d H:i' }}</td>
-        <td class="subject">{{ ct.followup_set.latest.subject }}</td>
+        <td class="subject">{{ ct.issn }}</td>
+        <td class="subject">{{ ct.journal_title }}</td>
         <td class="subject">{{ ct.institution }}</td>
-        <td>{{ ct.issn }}</td>
-        <td>{{ ct.context }}</td>
         <td>{{ ct.type }}</td>
-
-        <td>{{ ct.followup_set.latest.status }}</td>
-        <td class="update">{{ ct.followup_set.latest.iteration_date|date:'Y/m/d H:i' }}</td>
+        <td>{{ ct.description }}</td>
+        <td>{{ ct.creator }}</td>
+        <!--td>{{ ct.status }}</td>
+        <td class="update">{{ ct.followup_set.latest.iteration_date|date:'Y/m/d H:i' }}</td-->
         <td>
             <ul>
                 <li><a class="history" href="/ticket/history/{{ ct.pk }}/" title="{% trans 'view history' %}"><span>{% trans "view history" %}</span></a></li>
@@ -62,6 +62,7 @@ $(document).ready(function() {
                 {% endif %}
             </ul>
         </td>
+
     </tr>
 {% endfor %}
     <tbody>

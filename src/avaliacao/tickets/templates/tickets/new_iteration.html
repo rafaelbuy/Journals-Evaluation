@@ -8,12 +8,11 @@
 {% endblock %}
 
 {% block body %}
-
 <form action="/ticket/{{ mode }}/{{ ticket.id }}/" method="POST"
                             enctype="multipart/form-data">{% csrf_token %}
     {{ forms_media.management_form }}
       <fieldset>
-        <legend>{% trans 'Ticket info' %}</legend>
+        <legend>{% trans 'Ingress info' %}</legend>
         <table>
             <col width="20%">
             <col width="80%">
@@ -25,14 +24,6 @@
                 <th>{% trans "Date of Registration" %}</th>
                 <td>{{ ticket.created }}</td>
             </tr>
-            <!--tr>
-                <th>{% trans "Context" %}</th>
-                <td>{{ ticket.context }}</td>
-            </tr>
-            <tr>
-                <th>{% trans "Ticket Type" %}</th>
-                <td>{{ ticket.type }}</td>
-            </tr-->
             {{ form_followup }}
         </table>
       </fieldset>

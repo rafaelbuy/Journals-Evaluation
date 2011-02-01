@@ -7,9 +7,10 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django import forms
 from django.utils.translation import ugettext as _
 from django.contrib.auth.decorators import login_required
+from django.core import serializers
 #from django.contrib.auth import logout
 
-from avaliacao.tickets.models import Ticket, Followup, Media
+from avaliacao.tickets.models import Ticket, Followup, Media, Type, Context
 
 import choices
 
@@ -39,6 +40,12 @@ def user_index(request):
     })
     return HttpResponse(t.render(c))
 
+
+def get_context(request, type_id):
+    contexts = Context.objects.filter(type=type_id)
+    retorno = serializers.serialize("json", contexts)
+    return HttpResponse(retorno, mimetype="text/javascript")
+
 @login_required
 def waiting_acceptance(request):
     fw_waiting = Followup.objects.filter(status = 'new', ticket__type='review')
@@ -55,8 +62,10 @@ def waiting_acceptance(request):
 def reopen_ticket(request, object_id):
     ticket = get_object_or_404(Ticket, id=int(object_id))
     followup_latest = ticket.followup_set.latest()
-    followup_new = Followup(ticket=ticket, status='reopened', description=followup_latest.description,
-        subject=followup_latest.subject , reported_by=followup_latest.reported_by )
+    followup_new = Followup(ticket=ticket, status='reopened',
+                  description=followup_latest.description,
+                  subject=followup_latest.subject,
+                  reported_by=followup_latest.reported_by )
     followup_new.save();
 
     return HttpResponseRedirect(ticket.get_absolute_url())
@@ -65,15 +74,14 @@ def reopen_ticket(request, object_id):
 def close_ticket(request, object_id):
     ticket = get_object_or_404(Ticket, id=int(object_id))
     followup_latest = ticket.followup_set.latest()
-    followup_new = Followup(ticket=ticket, status='closed', description=followup_latest.description,
-        subject=followup_latest.subject , reported_by=followup_latest.reported_by )
+    followup_new = Followup(ticket=ticket, status='closed',
+                 description=followup_latest.description,
+                 subject=followup_latest.subject,
+                 reported_by=followup_latest.reported_by )
     followup_new.save();
 
     return HttpResponseRedirect(ticket.get_absolute_url())
 
-class FollowupParcForm(forms.Form):
-    description = forms.CharField(label=_('Description'),widget=forms.Textarea(
-                                    attrs={'rows':'15','cols':'70',}))
 
 @login_required
 def resolve_ticket(request, object_id):
@@ -120,39 +128,54 @@ def accept_ticket(request, object_id):
             'mode': 'accept'},
             context_instance=RequestContext(request))
 
+
+class FollowupParcForm(forms.Form):
+
+    Context = forms.ModelChoiceField(label=_('Context'), required=True,
+                                        queryset=Context.objects.none())
+
+    subject = forms.CharField(label=_('Subject'), required=True, max_length=256,
+                                widget=forms.TextInput(attrs={'size':'30',}))
+
+    description = forms.CharField(label=_('Description'),widget=forms.Textarea(
+                                    attrs={'rows':'15','cols':'70',}))
+
+    def __init__(self, *args, **kwargs):
+        type = kwargs.pop('ticket_type_id', None)
+        super(FollowupParcForm, self).__init__(*args, **kwargs)
+        if type:
+            self.fields['Context'].queryset = Context.objects.filter(
+                                           type=type['id'])
 @login_required
 def new_iteration(request, object_id):
     
     #get the ticket by id or 404 error
     ticket = get_object_or_404(Ticket, id=int(object_id))
-    
 
     #check method POST
     if request.method == 'POST':
 
         #create the set of media
         MediaInlineSet = inlineformset_factory(Followup, Media, extra=3)
-        
-        #forms_media = MediaInlineSet(request.POST, request.FILES, instance=followup)
 
-        #form_followup = FollowupParcForm(request.POST, request.FILES)
-        
-        form_followup = FollowupParcForm(request.POST, request.FILES)
+        ticket_type_id = {'id': ticket.type}
+
+        form_followup = FollowupParcForm(request.POST, request.FILES,
+                       ticket_type_id=ticket_type_id)
 
         if form_followup.is_valid():
 
-            #get the descruption from the form
+            user = request.user
             desc = form_followup.cleaned_data['description']
+            subject = form_followup.cleaned_data['subject']
+            context = form_followup.cleaned_data['Context']
 
-            #get the last followup inserted
-            fw_lt = ticket.followup_set.latest()
+            fw_nw = Followup(ticket=ticket, status="new", context=context,
+                description=desc, subject=subject,
+                reported_by=user, to_user=user,)
 
-            #Create a new iteration with information
-            fw_nw = Followup(ticket=ticket, status=fw_lt.status,
-                description=desc, subject=fw_lt.subject,
-                reported_by=fw_lt.reported_by, to_user=fw_lt.to_user, )
-
-            forms_media = MediaInlineSet(request.POST, request.FILES, instance=fw_nw)
+            forms_media = MediaInlineSet(request.POST, request.FILES,
+                         instance=fw_nw)
 
             fw_nw.save()
             
@@ -162,8 +185,10 @@ def new_iteration(request, object_id):
         return HttpResponseRedirect(ticket.get_absolute_url())
     else:
 
+        ticket_type_id = {'id': ticket.type}
+        
         #create the form for Followup
-        form_followup = FollowupParcForm()
+        form_followup = FollowupParcForm(ticket_type_id=ticket_type_id)
 
         #object NAMEInLineSet
         #about http://docs.djangoproject.com/en/dev/topics/forms/modelforms/
@@ -175,62 +200,62 @@ def new_iteration(request, object_id):
         
         forms = dict(form_followup=form_followup, forms_media=forms_media,
                                 mode = 'newiteration', ticket=ticket)
-        return render_to_response('tickets/new_iteration.html', forms,
+                                
+        return render_to_response('tickets/new_iteration.html', forms, 
                                 context_instance=RequestContext(request))
 
 
 #class to represent the form
 class FollowupParcBForm(forms.Form):
-    title_journal = forms.CharField(label=_('Journal Title'), required=True, max_length=256,
-                                widget=forms.TextInput(attrs={'size':'30',}))
-    institution = forms.CharField(label=_('Institution'), required=True, max_length=512,
-                                widget=forms.TextInput(attrs={'size':'40',}))
-    issn = forms.CharField(label=_('ISSN'), required=True, max_length=9,
-                                widget=forms.TextInput(attrs={'size':'10',}))
-    description = forms.CharField(label=_('Description'), required=True,
-                                widget=forms.Textarea(attrs={'rows':'15',
-                                'cols':'70',}))
 
+    journal_title = forms.CharField(label=_('Journal Title'), required=True,
+                max_length=256,widget=forms.TextInput(attrs={'size':'30',}))
+
+    institution = forms.CharField(label=_('Institution'), required=True,
+                max_length=512, widget=forms.TextInput(attrs={'size':'40',}))
+
+    issn = forms.CharField(label=_('ISSN'), required=True, max_length=9,
+                               widget=forms.TextInput(attrs={'size':'10',}))
+
+    process = forms.ModelChoiceField(label=_('Process'), required=True,
+                                            queryset=Type.objects.all())
+
+    description = forms.CharField(label=_('Description'), required=True,
+                    widget=forms.Textarea(attrs={'rows':'15','cols':'70',}))
 
 @login_required
-def open_ticket(request,context,type):
+def open_ticket(request):
+
     if request.method == 'POST':
 
         #instance of form
         form = FollowupParcBForm(request.POST, request.FILES)
         
         if form.is_valid():
-
+            
             #Get the user and create a new ticket
-            user =  request.user
+            user = request.user
             institution = form.cleaned_data['institution']
             issn = form.cleaned_data['issn']
-            ticket = Ticket(context=context, type=type, creator=user,
-                    institution=institution, issn=issn )
-            ticket.save()
-            
-            #get the data from the form 
-            subject = form.cleaned_data['title_journal']
+            journal_title = form.cleaned_data['journal_title']
+            process = form.cleaned_data['process']
             description = form.cleaned_data['description']
-            #institution = form.cleaned_data['institution']
-
-            #create a new followup 
-            fw_nw = Followup(ticket=ticket , status='new',
-                description=description, subject=subject,
-                reported_by=request.user, )
-            fw_nw.save()
+            
+            ticket = Ticket(type=process, creator=user, institution=institution,
+                    issn=issn, journal_title=journal_title,
+                    description=description)
+            ticket.save()
 
             return HttpResponseRedirect(ticket.get_absolute_url())
         else:
-             #FIXME this must have the error message
-             #recovering Ticket Data to input form fields
-            open_ticket_form = FollowupParcBForm() # An unbound form
+             
+             open_ticket_form = FollowupParcBForm() # An unbound form
             
-            return render_to_response('tickets/open_ticket.html', {
+             return render_to_response('tickets/open_ticket.html', {
                 'open_ticket_form': open_ticket_form,
-                'context': context,
                 'type': type,
                 'mode': 'open_ticket',
+                'form': form,
                 'user_name': request.user.pk},
                 context_instance=RequestContext(request))
     else:
@@ -240,8 +265,8 @@ def open_ticket(request,context,type):
 
     return render_to_response('tickets/open_ticket.html', {
         'open_ticket_form': open_ticket_form,
-        'context': context,
         'type': type,
         'mode': 'open_ticket',
         'user_name': request.user.pk},
         context_instance=RequestContext(request))
+

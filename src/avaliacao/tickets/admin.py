@@ -8,7 +8,13 @@ class MediaInline(admin.StackedInline):
 
 class FollowupInline(admin.StackedInline):
     model = Followup
-
+    
+class TypeInline(admin.StackedInline):
+    model = Type
+    
+class ContextInline(admin.StackedInline):
+    model = Type
+    
 class MediaAdmin(admin.ModelAdmin):
     list_display = ('file', )
 
@@ -21,10 +27,17 @@ class FollowupAdmin(admin.ModelAdmin):
         instance.reported_by = request.user
         super(FollowupAdmin, self).save_model(request, instance, form, change)
 
+class TypeAdmin(admin.ModelAdmin):
+    pass
+
+class ContextAdmin(admin.ModelAdmin):
+    pass
+
 class TicketAdmin(admin.ModelAdmin):
-    list_display = ('created','context','creator')
-    list_display_links = ('context',)
-    search_fields = ('context',)
+    #list_display = ('created','context','creator')
+    #$list_display_links = ('context',)
+    #search_fields = ('context',)
+    list_display = ('created', 'creator')
     inlines = [FollowupInline]
 
     def save_model(self, request, instance, form, change):
@@ -40,3 +53,9 @@ if Followup not in admin.site._registry:
 
 if Media not in admin.site._registry:
     admin.site.register(Media, MediaAdmin)
+
+if Type not in admin.site._registry:
+    admin.site.register(Type, TypeAdmin)
+
+if Context not in admin.site._registry:
+    admin.site.register(Context, ContextAdmin)

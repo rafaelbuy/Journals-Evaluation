@@ -4,28 +4,26 @@
 {% block stepmenu_top %}
     {{ block.super }}
     / <a href="{% url ticket.user_index %}">{% trans 'Ingress' %}</a> / {% trans 'Open Ingress' %}
-    <br/><br/>
 {% endblock %}
 
 {% block body %}
-<h2>{% trans "New Ingress" %}</h2>
-<br/>
-<form method="post" action="/ticket/open/{{ context }}/{{ type }}/">{% csrf_token %}
-    <table class="table">
-        <col width="10%"/>
-        <col width="85%"/>
 
-        <!--tr>
-            <th>Context:</th>
-            <td>{{ context }}</td>
-        </tr>
-        <tr>
-            <th>Type:</th>
-            <td>{{ type }}</td>
-        </tr-->
-        
-        {{open_ticket_form.as_table}}
-    </table>
-<input class="addNew" name="submit" type="submit" value="{% trans "Add Ingress" %}">
-</form>
+<fieldset>
+    <legend>{% trans "New Ingress" %}</legend>
+    <form method="post" action="/ticket/open/">{% csrf_token %}
+        <table class="table">
+            <col width="10%"/>
+            <col width="85%"/>
+            {% if form.errors %}
+                {% for field in form %}
+                        <tr><td colspan="2">{{ field.errors }}</td></tr>
+                        <tr><td>{{ field.label_tag }}</td><td>{{ field }}</td></tr>
+                {% endfor %}
+            {% else %}
+                {{open_ticket_form.as_table}}
+            {% endif %}
+        </table>
+    <input class="addNew" name="submit" type="submit" value="{% trans "Add Ingress" %}">
+    </form>
+</fieldset>
 {% endblock %}

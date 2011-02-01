@@ -16,20 +16,22 @@
         <table class="table">
             <tr>
                 <th>{% trans "Creation date" %}</th>
-                <th>{% trans "Context" %}</th>
-                <th>{% trans "Type" %}</th>
-                <th>{% trans "Subject" %}</th>
+                <th>{% trans "Journal Title" %}</th>
+                <th>{% trans "Institution" %}</th>
+                <th>{% trans "Process" %}</th>
+                <th>{% trans "Description" %}</th>
+                <th>{% trans "User" %}</th>
                 <th>{% trans "Status" %}</th>
-                <th>{% trans "Last update" %}</th>
-                <!--th>{% trans "Mark as" %}</th-->
             </tr>
             <tr>
                 <td>{{ object.created }}</td>
-                <td>{{ object.context }}</td>
+                <td>{{ object.journal_title }}</td>
+                <td>{{ object.institution }}</td>
                 <td>{{ object.type }}</td>
-                <td>{{ object.followup_set.latest.subject }}</td>
-                <td>{{ object.followup_set.latest.status }}</td>
-                <td>{{ object.followup_set.latest.iteration_date }}</td>
+                <td>{{ object.description }}</td>
+                <td>{{ object.creator }}</td>
+                <td>{{ object.status }}</td>
+                <!--td>{{ object.followup_set.latest.iteration_date }}</td-->
                 <!--td>
                     <ul>
                         {% if object.is_closed or object.is_resolved %}
@@ -50,32 +52,35 @@
     {% endif %}
 </fieldset>
 
-<fieldset>
-    <legend>{% trans "History" %}</legend>
-    {% if object.followup_set.all %}
-    <table class="table">
-        <tr>
-            <th>{% trans "Update date" %}</th>
-            <th>{% trans "Status" %}</th>
-            <th width="40%">{% trans "Description" %}</th>
-            <th>{% trans "Assigned to" %}</th>
-            <th>{% trans "Files" %}</th>
-        </tr>
-        {% for fw in object.followup_set.all %}
-        <tr>
-            <td>{{ fw.iteration_date }}</td>
-            <td>{{ fw.status }}</td>
-            <td width="40%" style="text-align: justify;">{{ fw.description }}</td>
-            <td>{{ fw.to_user }}</td>
-                <td>
-                {% for med in fw.ticket_media.all %}
-                    <a href="/static/{{ med.file }}">{{med.file}}</a><br/>
-                {% endfor %}
-                </td>
-        </tr>
-        {% endfor %}
-    </table>
-    {% endif %}
-</fieldset>
+{% if object.followup_set.all %}
+    <fieldset>
+        <legend>{% trans "History" %}</legend>
+        <table class="table">
+            <tr>
+                <th>{% trans "Update date" %}</th>
+                <th width="30%">{% trans "Description" %}</th>
+                <!--th>{% trans "Assigned to" %}</th-->
+                <th>{% trans "Context" %}</th>
+                <th>{% trans "Status" %}</th>
+                <th>{% trans "Files" %}</th>
+            </tr>
+            {% for fw in object.followup_set.all %}
+            <tr>
+                <td>{{ fw.iteration_date }}</td>
+                <td>{{ fw.description }}</td>
+                <td>{{ fw.context }}</td>
+                <td>{{ fw.status }}</td>
+                <!--td width="40%" style="text-align: justify;">{{ fw.description }}</td-->
+                <!--td>{{ fw.to_user }}</td-->
+                    <td>
+                    {% for med in fw.ticket_media.all %}
+                        <a href="/static/{{ med.file }}">{{med.file}}</a><br/>
+                    {% endfor %}
+                    </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </fieldset>
+{% endif %}
 {% if object.is_closed or object.is_resolved %} <p>{% trans 'To show the "add iteration button" the ticket must be diferente from "closed".' %}</p> {% else %} <a class="buttonadd" href="/ticket/newiteration/{{ object.pk }}/">Add Iteration</a> {% endif %}
 {% endblock %}
