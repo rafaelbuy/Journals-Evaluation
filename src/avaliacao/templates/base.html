@@ -126,6 +126,10 @@
                             {% if request.LANGUAGE_CODE == 'pt-br' %}<li><a href="/about/pt/">{% trans "About" %}</a></li>{% endif %}
                             {% if request.LANGUAGE_CODE == 'es' %}<li><a href="/about/es/">{% trans "About" %}</a></li>{% endif %}
                             {% if request.LANGUAGE_CODE == 'en' %}<li><a href="/about/en/">{% trans "About" %}</a></li>{% endif %}
+
+                            {% if request.LANGUAGE_CODE == 'pt-br' %} <li><a href="/faq/pt/">{% trans "FAQ" %}</a></li>{% endif %}
+                            {% if request.LANGUAGE_CODE == 'es' %} <li><a href="/faq/es/">{% trans "FAQ" %}</a></li>{% endif %}
+                            {% if request.LANGUAGE_CODE == 'en' %} <li><a href="/faq/en/">{% trans "FAQ" %}</a></li>{% endif %}
                             
                             {% if request.LANGUAGE_CODE == 'pt-br' %} <li><a href="/help/pt/">{% trans "Help" %}</a></li>{% endif %}
                             {% if request.LANGUAGE_CODE == 'es' %} <li><a href="/help/es/">{% trans "Help" %}</a></li>{% endif %}
