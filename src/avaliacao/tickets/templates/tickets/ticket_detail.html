@@ -11,7 +11,7 @@
 {% block body %}
 
 <fieldset>
-    <legend>{% trans "Current Situation" %}</legend>
+    <legend>{% trans "Ingress" %}</legend>
     {% if object %}
         <table class="table">
             <tr>
@@ -21,14 +21,13 @@
                 <th>{% trans "Process" %}</th>
                 <th>{% trans "Description" %}</th>
                 <th>{% trans "User" %}</th>
-                <th>{% trans "Status" %}</th>
             </tr>
             <tr>
                 <td>{{ object.created }}</td>
                 <td>{{ object.journal_title }}</td>
                 <td>{{ object.institution }}</td>
                 <td>{{ object.type }}</td>
-                <td>{{ object.description }}</td>
+                <td width="50%">{{ object.description }}</td>
                 <td>{{ object.creator }}</td>
                 <td>{{ object.status }}</td>
                 <!--td>{{ object.followup_set.latest.iteration_date }}</td-->
@@ -58,7 +57,7 @@
         <table class="table">
             <tr>
                 <th>{% trans "Update date" %}</th>
-                <th width="30%">{% trans "Description" %}</th>
+                <th>{% trans "Description" %}</th>
                 <!--th>{% trans "Assigned to" %}</th-->
                 <th>{% trans "Context" %}</th>
                 <th>{% trans "Status" %}</th>
@@ -67,7 +66,7 @@
             {% for fw in object.followup_set.all %}
             <tr>
                 <td>{{ fw.iteration_date }}</td>
-                <td>{{ fw.description }}</td>
+                <td width="30%">{{ fw.description }}</td>
                 <td>{{ fw.context }}</td>
                 <td>{{ fw.status }}</td>
                 <!--td width="40%" style="text-align: justify;">{{ fw.description }}</td-->

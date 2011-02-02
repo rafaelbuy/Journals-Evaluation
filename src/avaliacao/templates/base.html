@@ -14,9 +14,12 @@
         {% block extrahead %}{% endblock %}
     </head>
     <body>
+
+
         <div class="{% block container_class %}container wide{% endblock %}">
             <div id="bar_top">
                <div class="languages">
+
                    <form name="form_language" id="form_language" action="/i18n/setlang/" method="post">
                    <ul>
                        {% csrf_token %}
@@ -50,6 +53,7 @@
                     </div>
                 </div>
                 {% block login %}
+
                 <div class="topRight">
                     {% if user.is_authenticated %}
                     <div class="userData">
@@ -57,20 +61,10 @@
                             <span>{% trans 'Username' %}</span>
                             <big>{{ user.username }}</big>
                         </div>
-                        <!--div class="userData_block">
-                            <span><a href="#">{% trans 'Submissions' %}</a></span>
-                            <big></big>
-                        </div>
                         <div class="userData_block">
-                            <span><a href="url ticket.index">{% trans 'Tickets' %}</a></span>
-                            <big>user.get_profile.amount_tickets</big>
-                        </div-->
-                        <!--div class="userData_block">
-                            <ul>
-                                <li><a href="url reviewapp.userhome">{% trans 'Profile' %}</a></li>
-                                <li><a href="url reviewapp.dashboard">{% trans 'Dashboard' %}</a></li>
-                            </ul>
-                        </div-->
+                            <span>{% trans 'Count Ingress' %}</span>
+                            <span style="text-align: center"><big>{{request.session.count_tickets_user}}</big></span>
+                        </div>
                         <div class="userData_block logout">
                             <table>
                             <tr>
@@ -110,53 +104,39 @@
                                 <li><a href="/accounts/password/reset" title="{% trans 'Forgot password?' %}">{% trans 'Forgot password?' %}</a></li>
                                 <li><a href="/accounts/register" title="{% trans 'create an account to submit trial records' %}">{% trans 'Register' %}</a></li>
                             </ul>
+                            {% if invalid %}
+                                 <div class="loginError">{% trans 'Your username and password did not match. Please try again.' %}</div>
+                            {% endif %}
+                            {% if active %}
+                                 <div class="loginError">{% trans 'Your account is not active. Please contact the SciELO Evaluation Team' %}</div>
+                            {% endif %}
                         </div>
-                        <div class="spacer">&#160;</div>
+
+            <div class="spacer">&#160;</div>
                     </div>
                     {% endif %}
                     <div class="topMenu">
                         <ul>
-                             {% if user.is_authenticated %}<li><a href="{% url ticket.user_index %}">{% trans 'List of Ingress' %}</a></li>{% endif %}
-                            <li><a href="/news/">{% trans "News" %}</a></li>
-                            <li><a href="/about/">{% trans "About" %}</a></li>
-                            <li><a href="/help/">{% trans "Help" %}</a></li>
+                            {% if user.is_authenticated %}<li><a href="{% url ticket.user_index %}">{% trans 'List of Ingress' %}</a></li>{% endif %}
+                             
+                            {% if request.LANGUAGE_CODE == 'pt-br' %}<li><a href="/news/pt/">{% trans "News" %}</a></li>{% endif %}
+                            {% if request.LANGUAGE_CODE == 'es' %}<li><a href="/news/es/">{% trans "News" %}</a></li>{% endif %}
+                            {% if request.LANGUAGE_CODE == 'en' %}<li><a href="/news/en/">{% trans "News" %}</a></li>{% endif %}
+
+                            {% if request.LANGUAGE_CODE == 'pt-br' %}<li><a href="/about/pt/">{% trans "About" %}</a></li>{% endif %}
+                            {% if request.LANGUAGE_CODE == 'es' %}<li><a href="/about/es/">{% trans "About" %}</a></li>{% endif %}
+                            {% if request.LANGUAGE_CODE == 'en' %}<li><a href="/about/en/">{% trans "About" %}</a></li>{% endif %}
+                            
+                            {% if request.LANGUAGE_CODE == 'pt-br' %} <li><a href="/help/pt/">{% trans "Help" %}</a></li>{% endif %}
+                            {% if request.LANGUAGE_CODE == 'es' %} <li><a href="/help/es/">{% trans "Help" %}</a></li>{% endif %}
+                            {% if request.LANGUAGE_CODE == 'en' %} <li><a href="/help/en/">{% trans "Help" %}</a></li>{% endif %}
                         </ul>
                     </div>
-                    <!--div class="search">
-                        <form action="url repository.list_all" method="get">
-                            <input type="text" name="q" class="textEntry" id="search" onblur="this.className = 'textEntry';" onfocus="this.className = 'textEntry textEntryFocus';" />
-                            <input type="submit" class="submit" value="{% trans 'Search' %}" />
-                        </form>
-                    </div-->
                 </div>
                 {% endblock %}
                 <div class="spacer">&#160;</div>
             </div>
             <div class="middle">
-                    <!--
-                    {% block sidebar %}
-                    <div class="sideBar">
-                        
-                        {% if user.is_authenticated %}
-
-                         <div class="menu">
-                            <ul>
-                                <a href="{% url ticket.user_index %}">{% trans 'Tickets' %}</a>
-                            </ul>
-                        </div>
-
-                        {% else %}
-
-                        <div class="menu">
-                            <ul>
-                                <li><a href="#" title="{% trans 'New Submission' %}">Não logado</a></li>
-                            </ul>
-                        </div>
-                        
-                        {% endif %}
-                    </div>
-                    {% endblock %}
-                    -->
                 <div class="mainContent">
                     {% block stepmenu_top %}{% endblock %}
                     {% block body %}{% endblock %}
@@ -165,7 +145,7 @@
             </div>
             <div id="footer">
                 <p>
-                    <strong>SciELO - Scientific Electronic Library Online <a href="http://www.fapesp.br" target="_blank">FAPESP</a> <a href="http://www.cnpq.br" target="_blank">CNPq</a> <a href="http://www.fapunifesp.edu.br" target="_blank">FapUnifesp</a> <a href="http://www.bireme.org">BIREME</a></strong></p>
+                    <strong>SciELO - Scientific Electronic Library Online <a href="http://www.fapesp.br" target="_blank">FAPESP</a> <a href="http://www.cnpq.br" target="_blank">CNPq</a> <a href="http://www.bireme.org">BIREME</a> <a href="http://www.fapunifesp.edu.br" target="_blank">FapUnifesp</a> </strong></p>
                     <p>Rua Dr. Diogo de   Farias, 1087 conj. 810&nbsp; - Vila Clementino  04037-003 São Paulo SP -   Brazil</p>
                     <p>Tel.: (55 11) 3369-4080 - Email: <a href="mailto:scielo.avaliacao@scielo.org">scielo.avaliacao@scielo.org</a>
                 </p>

@@ -15,6 +15,9 @@ class TypeInline(admin.StackedInline):
 class ContextInline(admin.StackedInline):
     model = Type
     
+class StatusInline(admin.StackedInline):
+    model = Status
+    
 class MediaAdmin(admin.ModelAdmin):
     list_display = ('file', )
 
@@ -33,6 +36,8 @@ class TypeAdmin(admin.ModelAdmin):
 class ContextAdmin(admin.ModelAdmin):
     pass
 
+class StatusAdmin(admin.ModelAdmin):
+    pass
 class TicketAdmin(admin.ModelAdmin):
     #list_display = ('created','context','creator')
     #$list_display_links = ('context',)
@@ -59,3 +64,6 @@ if Type not in admin.site._registry:
 
 if Context not in admin.site._registry:
     admin.site.register(Context, ContextAdmin)
+    
+if Status not in admin.site._registry:
+    admin.site.register(Status, StatusAdmin)

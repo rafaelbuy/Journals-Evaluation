@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import *
 from django.contrib.auth.views import password_reset, password_reset_done
 from django.contrib.auth.views import password_reset_complete, password_reset_confirm
-from avaliacao.tickets.views import index
+from avaliacao.tickets.views import index, user_logout, user_login
 from django.contrib import admin
 
 admin.autodiscover()
@@ -19,9 +19,13 @@ urlpatterns = patterns('',
     # Tickets application
     url(r'^ticket/', include('avaliacao.tickets.urls')),
 
+    url(r'^accounts/logout/$', user_logout, name='tickets.user_logout'),
+
+    url(r'^accounts/login/$', user_login, name='tickets.user_login'),
+
     # django-registration views
     url(r'^accounts/', include('registration.urls')),
-    
+
     url(r'^accounts/password/reset/$', password_reset, {
         'template_name': 'registration/password_reset_form.html',
         'email_template_name': 'registration/password_reset_email.html',

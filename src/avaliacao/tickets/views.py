@@ -8,9 +8,9 @@ from django import forms
 from django.utils.translation import ugettext as _
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
-#from django.contrib.auth import logout
+from django.contrib.auth import logout, authenticate, login
 
-from avaliacao.tickets.models import Ticket, Followup, Media, Type, Context
+from avaliacao.tickets.models import Ticket, Followup, Media, Type, Context, Status
 
 import choices
 
@@ -20,23 +20,50 @@ def index(request):
     c = RequestContext(request)
     return HttpResponse(t.render(c))
 
-#def user_logout(request):
-#    logout(request)
-#    t = loader.get_template('tickets/home_tickets.html')
-#    c = RequestContext(request)
-#    return HttpResponse(t.render(c))
+def user_logout(request):
+    logout(request)
+    t = loader.get_template('tickets/home_tickets.html')
+    c = RequestContext(request)
+    return HttpResponse(t.render(c))
+
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                return HttpResponseRedirect('/ticket/')
+            else:
+                t = loader.get_template('tickets/home_tickets.html')
+                c = RequestContext(request,{
+                'active': True,})
+                return HttpResponse(t.render(c))
+        else:
+            # Return an 'invalid login' error message.
+            t = loader.get_template('tickets/home_tickets.html')
+            c = RequestContext(request,{
+            'invalid': True,})
+            return HttpResponse(t.render(c))
+    else:
+        t = loader.get_template('tickets/home_tickets.html')
+        c = RequestContext(request)
+        return HttpResponse(t.render(c))
 
 @login_required
 def user_index(request):
     user_tickets = Ticket.objects.filter(creator=request.user)[:5]
     user_open_tickets  = (i.opened_tickets() for i in Ticket.objects.all())
     user_close_tickets = (i.closed_tickets() for i in Ticket.objects.all())
+    request.session['count_tickets_user'] = Ticket.objects.filter(creator=request.user).count()
+    
     t = loader.get_template('tickets/user_tickets.html')
     c = RequestContext(request, {
         'user_tickets': user_tickets,
         'user_open_tickets': user_open_tickets,
         'choices': choices,
-        'user_close_tickets': user_close_tickets
+        'user_close_tickets': user_close_tickets,
     })
     return HttpResponse(t.render(c))
 
@@ -131,11 +158,11 @@ def accept_ticket(request, object_id):
 
 class FollowupParcForm(forms.Form):
 
-    Context = forms.ModelChoiceField(label=_('Context'), required=True,
-                                        queryset=Context.objects.none())
-
     subject = forms.CharField(label=_('Subject'), required=True, max_length=256,
                                 widget=forms.TextInput(attrs={'size':'30',}))
+
+    Context = forms.ModelChoiceField(label=_('Context'), required=True,
+                                        queryset=Context.objects.none())
 
     description = forms.CharField(label=_('Description'),widget=forms.Textarea(
                                     attrs={'rows':'15','cols':'70',}))
@@ -169,8 +196,14 @@ def new_iteration(request, object_id):
             desc = form_followup.cleaned_data['description']
             subject = form_followup.cleaned_data['subject']
             context = form_followup.cleaned_data['Context']
+            
+            try:
+                fw_lt = ticket.followup_set.latest()
+                status = fw_lt.status
+            except Exception:
+                status = Status.objects.get(pk=1)
 
-            fw_nw = Followup(ticket=ticket, status="new", context=context,
+            fw_nw = Followup(ticket=ticket, status=status, context=context,
                 description=desc, subject=subject,
                 reported_by=user, to_user=user,)
 
@@ -209,7 +242,7 @@ def new_iteration(request, object_id):
 class FollowupParcBForm(forms.Form):
 
     journal_title = forms.CharField(label=_('Journal Title'), required=True,
-                max_length=256,widget=forms.TextInput(attrs={'size':'30',}))
+                max_length=256,widget=forms.TextInput(attrs={'size':'50',}))
 
     institution = forms.CharField(label=_('Institution'), required=True,
                 max_length=512, widget=forms.TextInput(attrs={'size':'40',}))
