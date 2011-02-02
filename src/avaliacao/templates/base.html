@@ -117,11 +117,12 @@
                     {% endif %}
                     <div class="topMenu">
                         <ul>
-                            {% if user.is_authenticated %}<li><a href="{% url ticket.user_index %}">{% trans 'List of Ingress' %}</a></li>{% endif %}
-                             
-                            {% if request.LANGUAGE_CODE == 'pt-br' %}<li><a href="/news/pt/">{% trans "News" %}</a></li>{% endif %}
-                            {% if request.LANGUAGE_CODE == 'es' %}<li><a href="/news/es/">{% trans "News" %}</a></li>{% endif %}
-                            {% if request.LANGUAGE_CODE == 'en' %}<li><a href="/news/en/">{% trans "News" %}</a></li>{% endif %}
+                            {% if user.is_authenticated %}<li><a href="{% url ticket.user_index %}">{% trans 'Ingress' %}</a></li>{% endif %}
+
+                            {% if request.LANGUAGE_CODE == 'pt-br' %}<li><a href="/documentation/pt/">{% trans "Documenttation" %}</a></li>{% endif %}
+                            {% if request.LANGUAGE_CODE == 'es' %}<li><a href="/documentation/es/">{% trans "Documenttation" %}</a></li>{% endif %}
+                            {% if request.LANGUAGE_CODE == 'en' %}<li><a href="/documentation/en/">{% trans "Documenttation" %}</a></li>{% endif %}
+
 
                             {% if request.LANGUAGE_CODE == 'pt-br' %}<li><a href="/about/pt/">{% trans "About" %}</a></li>{% endif %}
                             {% if request.LANGUAGE_CODE == 'es' %}<li><a href="/about/es/">{% trans "About" %}</a></li>{% endif %}
@@ -130,10 +131,15 @@
                             {% if request.LANGUAGE_CODE == 'pt-br' %} <li><a href="/faq/pt/">{% trans "FAQ" %}</a></li>{% endif %}
                             {% if request.LANGUAGE_CODE == 'es' %} <li><a href="/faq/es/">{% trans "FAQ" %}</a></li>{% endif %}
                             {% if request.LANGUAGE_CODE == 'en' %} <li><a href="/faq/en/">{% trans "FAQ" %}</a></li>{% endif %}
+
+                            {% if request.LANGUAGE_CODE == 'pt-br' %}<li><a href="/news/pt/">{% trans "News" %}</a></li>{% endif %}
+                            {% if request.LANGUAGE_CODE == 'es' %}<li><a href="/news/es/">{% trans "News" %}</a></li>{% endif %}
+                            {% if request.LANGUAGE_CODE == 'en' %}<li><a href="/news/en/">{% trans "News" %}</a></li>{% endif %}
                             
                             {% if request.LANGUAGE_CODE == 'pt-br' %} <li><a href="/help/pt/">{% trans "Help" %}</a></li>{% endif %}
                             {% if request.LANGUAGE_CODE == 'es' %} <li><a href="/help/es/">{% trans "Help" %}</a></li>{% endif %}
                             {% if request.LANGUAGE_CODE == 'en' %} <li><a href="/help/en/">{% trans "Help" %}</a></li>{% endif %}
+
                         </ul>
                     </div>
                 </div>

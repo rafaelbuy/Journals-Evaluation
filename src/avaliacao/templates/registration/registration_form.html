@@ -1,12 +1,9 @@
-{% extends "base_columns.html" %}
+{% extends "base.html" %}
 {% load i18n %}
 
 {% block body %}
 
-<small>
-    / <a href="{% url avaliacao.ticket.index %}">{% trans 'Home' %}</a>
-</small>
-<big>/ {% trans 'Register' %}</big>
+/ <a href="{% url avaliacao.ticket.index %}">{% trans 'Home' %}</a> / {% trans 'Register' %}
 
 {% if form.errors %}
     <p>{% trans "Please correct the errors below." %}</p>
@@ -18,7 +15,7 @@
     <table>
         {{ form.as_table }}
     </table>
-    <input type="submit" value="{% trans "register" %}" />
+    <input  class="addNew" type="submit" value="{% trans "register" %}" />
 </form>
 
 {% endblock %}
