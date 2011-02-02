@@ -27,28 +27,31 @@ def user_logout(request):
     return HttpResponse(t.render(c))
 
 def user_login(request):
+
+    next = request.GET.get('next', None)
+
     if request.method == 'POST':
+        next = request.POST['next']
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect('/ticket/')
+                return HttpResponseRedirect(next)
             else:
                 t = loader.get_template('tickets/home_tickets.html')
                 c = RequestContext(request,{
                 'active': True,})
                 return HttpResponse(t.render(c))
         else:
-            # Return an 'invalid login' error message.
             t = loader.get_template('tickets/home_tickets.html')
             c = RequestContext(request,{
-            'invalid': True,})
+            'invalid': True, 'next': next})
             return HttpResponse(t.render(c))
     else:
         t = loader.get_template('tickets/home_tickets.html')
-        c = RequestContext(request)
+        c = RequestContext(request, {'next': next})
         return HttpResponse(t.render(c))
 
 @login_required
