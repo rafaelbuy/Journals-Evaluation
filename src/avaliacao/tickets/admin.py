@@ -42,7 +42,7 @@ class TicketAdmin(admin.ModelAdmin):
     #list_display = ('created','context','creator')
     #$list_display_links = ('context',)
     #search_fields = ('context',)
-    list_display = ('created', 'creator')
+    list_display = ('issn', 'creator', 'created')
     inlines = [FollowupInline]
 
     def save_model(self, request, instance, form, change):

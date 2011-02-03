@@ -56,7 +56,7 @@ def user_login(request):
 
 @login_required
 def user_index(request):
-    user_tickets = Ticket.objects.filter(creator=request.user)[:5]
+    user_tickets = Ticket.objects.filter(creator=request.user)[:20]
     user_open_tickets  = (i.opened_tickets() for i in Ticket.objects.all())
     user_close_tickets = (i.closed_tickets() for i in Ticket.objects.all())
     request.session['count_tickets_user'] = Ticket.objects.filter(creator=request.user).count()

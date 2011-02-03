@@ -131,4 +131,4 @@ class Media(models.Model):
     followup = models.ForeignKey(Followup, related_name="ticket_media", null=True,
         blank=True, db_index=True, )
     file = models.FileField(_('Upload File'), blank=True,
-        upload_to='tickets_files', )
+        upload_to='files', )

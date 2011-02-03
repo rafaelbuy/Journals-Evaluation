@@ -36,8 +36,7 @@ $(document).ready(function() {
         <th>{% trans "Institution" %}</th>
         <th>{% trans "Process" %}</th>
         <th>{% trans "Description" %}</th>
-        <th>{% trans "User" %}</th>
-        <!--th>{% trans "Status" %}</th-->
+        <th>{% trans "Creator" %}</th>
         <th></th>
     </tr>
     </thead>
@@ -49,10 +48,8 @@ $(document).ready(function() {
         <td class="subject">{{ ct.journal_title }}</td>
         <td class="subject">{{ ct.institution }}</td>
         <td>{{ ct.type }}</td>
-        <td width="50%">{{ ct.description }}</td>
+        <td width="30%">{{ ct.description }}</td>
         <td>{{ ct.creator }}</td>
-        <!--td>{{ ct.status }}</td>
-        <td class="update">{{ ct.followup_set.latest.iteration_date|date:'Y/m/d H:i' }}</td-->
         <td>
             <ul>
                 <li><a class="history" href="/ticket/history/{{ ct.pk }}/" title="{% trans 'view history' %}"><span>{% trans "view history" %}</span></a></li>
