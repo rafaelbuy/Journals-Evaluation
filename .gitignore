@@ -1,4 +1,4 @@
-src/avaliacao/static/tickets_files/*
+src/avaliacao/static/files/*
 src/avaliacao/settings.py
 nbproject
 *.pyc
