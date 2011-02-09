@@ -45,7 +45,10 @@ def user_login(request):
             return HttpResponse(t.render(c))
     else:
         t = loader.get_template('tickets/home_tickets.html')
-        c = RequestContext(request, {'required': True, 'next': next})
+        if next:
+            c = RequestContext(request, {'required': True, 'next': next})
+        else:
+            c = RequestContext(request, {'next': next})
         return HttpResponse(t.render(c))
 
 
