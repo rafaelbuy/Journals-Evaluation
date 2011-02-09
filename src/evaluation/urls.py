@@ -19,6 +19,8 @@ urlpatterns = patterns('',
 
     url(r'^accounts/', include('registration.urls')),
 
+    url(r'^translation/', include('rosetta.urls')),
+
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

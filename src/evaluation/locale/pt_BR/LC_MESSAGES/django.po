@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-12 17:05+0000\n"
-"PO-Revision-Date: 2011-02-02 17:11\n"
+"POT-Creation-Date: 2011-02-09 18:51+0000\n"
+"PO-Revision-Date: 2011-02-09 18:53\n"
 "Last-Translator: Jamil  Atta <atta.jamil@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,17 +17,237 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Translated-Using: django-rosetta 0.5.6\n"
 
-#: settings.TEMPLATE.py:54 settings.py:54
+#: settings.TEMPLATES.py:55 settings.py:55
 msgid "English"
 msgstr "Inglês"
 
-#: settings.TEMPLATE.py:55 settings.py:55
+#: settings.TEMPLATES.py:56 settings.py:56
 msgid "Español"
 msgstr "Espanhol"
 
-#: settings.TEMPLATE.py:56 settings.py:56
+#: settings.TEMPLATES.py:57 settings.py:57
 msgid "Portuguese"
 msgstr "Português"
+
+#: evaluations/models.py:10
+msgid "Processo"
+msgstr ""
+
+#: evaluations/models.py:18 evaluations/views.py:171
+#: evaluations/templates/evaluations/evaluation_detail.html:81
+msgid "Context"
+msgstr ""
+
+#: evaluations/models.py:26
+#: evaluations/templates/evaluations/evaluation_detail.html:38
+#: evaluations/templates/evaluations/evaluation_detail.html:82
+msgid "Status"
+msgstr ""
+
+#: evaluations/models.py:40
+#: evaluations/templates/evaluations/new_iteration.html:24
+msgid "Date of Registration"
+msgstr ""
+
+#: evaluations/models.py:43 evaluations/views.py:254
+#: evaluations/templates/evaluations/evaluation_detail.html:35
+#: evaluations/templates/evaluations/user_evaluations.html:36
+msgid "Institution"
+msgstr ""
+
+#: evaluations/models.py:45 evaluations/views.py:257
+#: evaluations/templates/evaluations/evaluation_detail.html:33
+#: evaluations/templates/evaluations/user_evaluations.html:34
+msgid "ISSN"
+msgstr ""
+
+#: evaluations/models.py:47 evaluations/views.py:251
+#: evaluations/templates/evaluations/evaluation_detail.html:34
+#: evaluations/templates/evaluations/user_evaluations.html:35
+msgid "Journal Title"
+msgstr ""
+
+#: evaluations/models.py:50 evaluations/models.py:103 evaluations/views.py:174
+#: evaluations/views.py:263
+#: evaluations/templates/evaluations/evaluation_detail.html:37
+#: evaluations/templates/evaluations/evaluation_detail.html:80
+#: evaluations/templates/evaluations/user_evaluations.html:38
+msgid "Description"
+msgstr ""
+
+#: evaluations/models.py:98
+msgid "Date of Iteration"
+msgstr ""
+
+#: evaluations/models.py:101 evaluations/views.py:168
+msgid "Subject"
+msgstr ""
+
+#: evaluations/models.py:108
+msgid "To User (e-mail)"
+msgstr ""
+
+#: evaluations/models.py:131
+msgid "Upload File"
+msgstr ""
+
+#: evaluations/views.py:260
+#: evaluations/templates/evaluations/evaluation_detail.html:36
+#: evaluations/templates/evaluations/user_evaluations.html:37
+msgid "Process"
+msgstr ""
+
+#: evaluations/templates/evaluations/evaluation_detail.html:7
+#: evaluations/templates/evaluations/evaluation_detail.html:28
+#: evaluations/templates/evaluations/new_iteration.html:6
+#: evaluations/templates/evaluations/open_evaluation.html:6
+#: templates/base.html:123
+msgid "Ingress"
+msgstr "Pedido de Avaliação"
+
+#: evaluations/templates/evaluations/evaluation_detail.html:8
+msgid "About Ingress"
+msgstr ""
+
+#: evaluations/templates/evaluations/evaluation_detail.html:32
+msgid "Creation date"
+msgstr ""
+
+#: evaluations/templates/evaluations/evaluation_detail.html:39
+msgid "Update"
+msgstr ""
+
+#: evaluations/templates/evaluations/evaluation_detail.html:40
+#: evaluations/templates/evaluations/user_evaluations.html:39
+msgid "Creator"
+msgstr ""
+
+#: evaluations/templates/evaluations/evaluation_detail.html:55
+msgid "reopen"
+msgstr ""
+
+#: evaluations/templates/evaluations/evaluation_detail.html:58
+msgid "resolved"
+msgstr ""
+
+#: evaluations/templates/evaluations/evaluation_detail.html:61
+msgid "closed"
+msgstr ""
+
+#: evaluations/templates/evaluations/evaluation_detail.html:68
+msgid "Evaluation not found"
+msgstr ""
+
+#: evaluations/templates/evaluations/evaluation_detail.html:72
+msgid "Please click on link 'Add iteration' to send files for SciELO Team"
+msgstr ""
+
+#: evaluations/templates/evaluations/evaluation_detail.html:76
+msgid "History"
+msgstr ""
+
+#: evaluations/templates/evaluations/evaluation_detail.html:79
+msgid "Update date"
+msgstr ""
+
+#: evaluations/templates/evaluations/evaluation_detail.html:83
+msgid "Files"
+msgstr ""
+
+#: evaluations/templates/evaluations/evaluation_detail.html:84
+msgid "Reported by"
+msgstr ""
+
+#: evaluations/templates/evaluations/evaluation_detail.html:107
+msgid "To show the \"add iteration button\" the evaluation must be diferente from \"closed\"."
+msgstr ""
+
+#: evaluations/templates/evaluations/evaluation_list.html:15
+msgid "open evaluation"
+msgstr ""
+
+#: evaluations/templates/evaluations/home_evaluations.html:3
+#: evaluations/templates/evaluations/user_evaluations.html:21
+#: evaluations/templates/evaluations/waiting_acceptance_evaluation.html:3
+msgid "User Evaluations"
+msgstr ""
+
+#: evaluations/templates/evaluations/new_iteration.html:7
+msgid "Add iteration"
+msgstr ""
+
+#: evaluations/templates/evaluations/new_iteration.html:15
+msgid "Ingress info"
+msgstr ""
+
+#: evaluations/templates/evaluations/new_iteration.html:20
+msgid "Author"
+msgstr ""
+
+#: evaluations/templates/evaluations/new_iteration.html:33
+msgid "Iteration File"
+msgstr ""
+
+#: evaluations/templates/evaluations/new_iteration.html:39
+msgid "Add Iteration"
+msgstr ""
+
+#: evaluations/templates/evaluations/open_evaluation.html:6
+msgid "Open Ingress"
+msgstr ""
+
+#: evaluations/templates/evaluations/open_evaluation.html:12
+#: evaluations/templates/evaluations/user_evaluations.html:29
+msgid "New Ingress"
+msgstr ""
+
+#: evaluations/templates/evaluations/open_evaluation.html:26
+msgid "Add Ingress"
+msgstr ""
+
+#: evaluations/templates/evaluations/user_evaluations.html:33
+msgid "Date"
+msgstr ""
+
+#: evaluations/templates/evaluations/user_evaluations.html:55
+msgid "view history"
+msgstr ""
+
+#: evaluations/templates/evaluations/user_evaluations.html:58
+msgid "add iteration"
+msgstr ""
+
+#: evaluations/templates/evaluations/waiting_acceptance_evaluation.html:8
+msgid "creation date"
+msgstr ""
+
+#: evaluations/templates/evaluations/waiting_acceptance_evaluation.html:9
+msgid "context"
+msgstr ""
+
+#: evaluations/templates/evaluations/waiting_acceptance_evaluation.html:10
+msgid "type"
+msgstr ""
+
+#: evaluations/templates/evaluations/waiting_acceptance_evaluation.html:11
+msgid "owner"
+msgstr ""
+
+#: evaluations/templates/evaluations/waiting_acceptance_evaluation.html:12
+msgid "subject"
+msgstr ""
+
+#: evaluations/templates/evaluations/waiting_acceptance_evaluation.html:13
+msgid "description"
+msgstr ""
+
+#: evaluations/templates/evaluations/waiting_acceptance_evaluation.html:24
+msgid "accepted"
+msgstr ""
+
+#: evaluations/templates/evaluations/waiting_acceptance_evaluation.html:29
+msgid "Have no  evaluations waiting acceptance"
+msgstr ""
 
 #: templates/404.html:6
 msgid "Page not found (404)"
@@ -45,76 +265,79 @@ msgstr ""
 msgid "SciELO Evaluation"
 msgstr "SciELO Avaliação"
 
-#: templates/base.html:27
+#: templates/base.html:50 templates/base.html.py:51 templates/base.html:52
 msgid "SciELO Journal Evaluation"
 msgstr "SciELO Avaliação"
 
-#: templates/base.html:35 templates/base.html.py:75
+#: templates/base.html:61 templates/base.html.py:91
 msgid "Username"
+msgstr "Usuário"
+
+#: templates/base.html:65
+msgid "Count Ingress"
 msgstr ""
 
-#: templates/base.html:39
-msgid "Submissions"
-msgstr ""
-
-#: templates/base.html:43 templates/base.html.py:97 templates/base.html:122
-#: evaluations/templates/evaluations/new_iteration.html:7
-#: evaluations/templates/evaluations/open_evaluation.html:7
-#: evaluations/templates/evaluations/evaluation_detail.html:8
-#: evaluations/templates/evaluations/user_evaluations.html:25
-msgid "Evaluations"
-msgstr ""
-
-#: templates/base.html:48
-msgid "Profile"
-msgstr ""
-
-#: templates/base.html:49
-msgid "Dashboard"
-msgstr ""
-
-#: templates/base.html:56 templates/base.html.py:60 templates/base.html:61
+#: templates/base.html:72 templates/base.html.py:76 templates/base.html:77
 msgid "Logout"
-msgstr ""
+msgstr "Sair"
 
-#: templates/base.html:79
+#: templates/base.html:95
 msgid "Password"
 msgstr ""
 
-#: templates/base.html:83
+#: templates/base.html:99
 msgid "login"
 msgstr ""
 
-#: templates/base.html:88
+#: templates/base.html:104
 msgid "Forgot password?"
 msgstr "Esqueci minha senha?"
 
-#: templates/base.html:89
+#: templates/base.html:105
 msgid "create an account to submit trial records"
 msgstr ""
 
-#: templates/base.html:89 templates/registration/registration_form.html:9
+#: templates/base.html:105 templates/registration/registration_form.html:6
+#: templates/registration/registration_form.html:19
 msgid "Register"
 msgstr ""
 
-#: templates/base.html:98
-msgid "News"
-msgstr "Notícias"
+#: templates/base.html:108
+msgid "Your username and password did not match. Please try again."
+msgstr ""
 
-#: templates/base.html:99
+#: templates/base.html:111
+msgid "Your account is not active. Please contact the SciELO or verify your e-mail"
+msgstr ""
+
+#: templates/base.html:114
+msgid "Please login on the system to see this page"
+msgstr ""
+
+#: templates/base.html:125 templates/base.html.py:126 templates/base.html:127
+msgid "Documentation"
+msgstr ""
+
+#: templates/base.html:129 templates/base.html.py:130 templates/base.html:131
 msgid "About"
 msgstr "Sobre"
 
-#: templates/base.html:100
+#: templates/base.html:133 templates/base.html.py:134 templates/base.html:135
+msgid "FAQ"
+msgstr ""
+
+#: templates/base.html:137 templates/base.html.py:138 templates/base.html:139
+msgid "News"
+msgstr "Notícias"
+
+#: templates/base.html:141 templates/base.html.py:142 templates/base.html:143
 msgid "Help"
 msgstr "Ajuda"
 
-#: templates/base.html:106
-msgid "Search"
-msgstr "Procura"
-
-#: templates/base.html:130
-msgid "New Submission"
+#: templates/flatpages/default.html:8
+#: templates/registration/password_reset_form.html:6
+#: templates/registration/registration_form.html:6
+msgid "Home"
 msgstr ""
 
 #: templates/registration/activate.html:6
@@ -127,40 +350,41 @@ msgstr ""
 msgid "You may now login using your username and password."
 msgstr ""
 
-#: templates/registration/password_reset_complete.html:7
+#: templates/registration/password_reset_complete.html:6
 msgid "Reset password complete"
 msgstr ""
 
-#: templates/registration/password_reset_complete.html:12
+#: templates/registration/password_reset_complete.html:11
 msgid "Your password has been reset! You may now"
 msgstr ""
 
-#: templates/registration/password_reset_complete.html:13
+#: templates/registration/password_reset_complete.html:12
 msgid "log in"
 msgstr ""
 
-#: templates/registration/password_reset_confirm.html:9
+#: templates/registration/password_reset_confirm.html:7
 msgid "Reset password"
 msgstr ""
 
-#: templates/registration/password_reset_confirm.html:14
+#: templates/registration/password_reset_confirm.html:12
 msgid "Enter your new password below to reset your password:"
 msgstr ""
 
-#: templates/registration/password_reset_confirm.html:19
-msgid "Set password"
-msgstr ""
+#: templates/registration/password_reset_confirm.html:20
+#, fuzzy
+msgid "Set Password"
+msgstr "Esqueci minha senha?"
 
-#: templates/registration/password_reset_done.html:8
-#: templates/registration/password_reset_form.html:9
+#: templates/registration/password_reset_done.html:7
+#: templates/registration/password_reset_form.html:6
 msgid "Forgot username or password"
 msgstr ""
 
-#: templates/registration/password_reset_done.html:10
+#: templates/registration/password_reset_done.html:7
 msgid "E-mail sent"
 msgstr ""
 
-#: templates/registration/password_reset_done.html:15
+#: templates/registration/password_reset_done.html:12
 msgid "We have sent you an email with a link to reset your password. Please check your email and click the link to continue."
 msgstr ""
 
@@ -182,17 +406,12 @@ msgid ""
 "into your web browser:\n"
 msgstr ""
 
-#: templates/registration/password_reset_form.html:7
-#: templates/registration/registration_form.html:7
-msgid "Home"
-msgstr ""
-
-#: templates/registration/password_reset_form.html:15
+#: templates/registration/password_reset_form.html:12
 msgid "Enter your e-mail in the form below and we will send your username and instructions to create a new password."
 msgstr ""
 
-#: templates/registration/password_reset_form.html:19
-msgid "Send"
+#: templates/registration/password_reset_form.html:16
+msgid "Send E-mail"
 msgstr ""
 
 #: templates/registration/registration_complete.html:6
@@ -203,212 +422,16 @@ msgstr ""
 msgid "Please click the activation link included in the e-mail to confirm you registration."
 msgstr ""
 
-#: templates/registration/registration_form.html:12
+#: templates/registration/registration_form.html:9
 msgid "Please correct the errors below."
 msgstr ""
 
-#: templates/registration/registration_form.html:15
+#: templates/registration/registration_form.html:12
 msgid "You will receive an email with a link to activate your account."
 msgstr ""
 
-#: templates/registration/registration_form.html:21
-msgid "register"
-msgstr ""
+#~ msgid "Submissions"
+#~ msgstr "Submissão"
 
-#: evaluations/models.py:14 evaluations/templates/evaluations/new_iteration.html:27
-msgid "Date of Registration"
-msgstr ""
-
-#: evaluations/models.py:16 evaluations/templates/evaluations/new_iteration.html:31
-#: evaluations/templates/evaluations/evaluation_detail.html:21
-#: evaluations/templates/evaluations/user_evaluations.html:35
-msgid "Context"
-msgstr ""
-
-#: evaluations/models.py:18 evaluations/templates/evaluations/new_iteration.html:35
-msgid "Evaluation Type"
-msgstr ""
-
-#: evaluations/models.py:69
-msgid "Date of Iteration"
-msgstr ""
-
-#: evaluations/models.py:71 evaluations/views.py:183
-#: evaluations/templates/evaluations/evaluation_detail.html:23
-#: evaluations/templates/evaluations/user_evaluations.html:37
-msgid "Subject"
-msgstr ""
-
-#: evaluations/models.py:72 evaluations/views.py:75 evaluations/views.py:184
-#: evaluations/templates/evaluations/evaluation_detail.html:62
-msgid "Description"
-msgstr ""
-
-#: evaluations/models.py:75
-msgid "To User (e-mail)"
-msgstr ""
-
-#: evaluations/models.py:77
-msgid "Evaluation Status"
-msgstr ""
-
-#: evaluations/models.py:95
-msgid "Upload File"
-msgstr ""
-
-#: evaluations/templates/evaluations/home_evaluations.html:3
-#: evaluations/templates/evaluations/user_evaluations.html:21
-#: evaluations/templates/evaluations/waiting_acceptance_evaluations.html:3
-msgid "User Evaluations"
-msgstr ""
-
-#: evaluations/templates/evaluations/new_iteration.html:9
-msgid "Add iteration"
-msgstr ""
-
-#: evaluations/templates/evaluations/new_iteration.html:18
-msgid "Evaluation info"
-msgstr ""
-
-#: evaluations/templates/evaluations/new_iteration.html:23
-msgid "Author"
-msgstr ""
-
-#: evaluations/templates/evaluations/new_iteration.html:44
-msgid "Iteration text"
-msgstr ""
-
-#: evaluations/templates/evaluations/open_evaluation.html:9
-msgid "Open Evaluation"
-msgstr ""
-
-#: evaluations/templates/evaluations/open_evaluation.html:14
-msgid "Opening Evaluation"
-msgstr ""
-
-#: evaluations/templates/evaluations/open_evaluation.html:32
-msgid "Submit"
-msgstr ""
-
-#: evaluations/templates/evaluations/evaluation_detail.html:10
-msgid "About evaluation"
-msgstr ""
-
-#: evaluations/templates/evaluations/evaluation_detail.html:16
-msgid "Current Situation"
-msgstr ""
-
-#: evaluations/templates/evaluations/evaluation_detail.html:20
-msgid "Creation date"
-msgstr ""
-
-#: evaluations/templates/evaluations/evaluation_detail.html:22
-#: evaluations/templates/evaluations/user_evaluations.html:36
-msgid "Type"
-msgstr ""
-
-#: evaluations/templates/evaluations/evaluation_detail.html:24
-#: evaluations/templates/evaluations/evaluation_detail.html:61
-#: evaluations/templates/evaluations/user_evaluations.html:38
-msgid "Status"
-msgstr ""
-
-#: evaluations/templates/evaluations/evaluation_detail.html:25
-msgid "Last update"
-msgstr ""
-
-#: evaluations/templates/evaluations/evaluation_detail.html:26
-msgid "Mark as"
-msgstr ""
-
-#: evaluations/templates/evaluations/evaluation_detail.html:38
-msgid "reopen"
-msgstr ""
-
-#: evaluations/templates/evaluations/evaluation_detail.html:41
-msgid "resolved"
-msgstr ""
-
-#: evaluations/templates/evaluations/evaluation_detail.html:44
-msgid "closed"
-msgstr ""
-
-#: evaluations/templates/evaluations/evaluation_detail.html:51
-msgid "Evaluation not found"
-msgstr ""
-
-#: evaluations/templates/evaluations/evaluation_detail.html:56
-msgid "History"
-msgstr ""
-
-#: evaluations/templates/evaluations/evaluation_detail.html:60
-msgid "Update date"
-msgstr ""
-
-#: evaluations/templates/evaluations/evaluation_detail.html:63
-msgid "Assigned to"
-msgstr ""
-
-#: evaluations/templates/evaluations/evaluation_detail.html:64
-msgid "Files"
-msgstr ""
-
-#: evaluations/templates/evaluations/evaluation_detail.html:82
-msgid "To show the \"add iteration button\" the evaluation must be diferente from \"closed\"."
-msgstr ""
-
-#: evaluations/templates/evaluations/evaluation_list.html:15
-msgid "open evaluation"
-msgstr ""
-
-#: evaluations/templates/evaluations/user_evaluations.html:30
-msgid "New Evaluation"
-msgstr ""
-
-#: evaluations/templates/evaluations/user_evaluations.html:34
-msgid "Date"
-msgstr ""
-
-#: evaluations/templates/evaluations/user_evaluations.html:39
-msgid "Updated"
-msgstr ""
-
-#: evaluations/templates/evaluations/user_evaluations.html:54
-msgid "view history"
-msgstr ""
-
-#: evaluations/templates/evaluations/user_evaluations.html:57
-msgid "add iteration"
-msgstr ""
-
-#: evaluations/templates/evaluations/waiting_acceptance_evaluations.html:8
-msgid "creation date"
-msgstr ""
-
-#: evaluations/templates/evaluations/waiting_acceptance_evaluations.html:9
-msgid "context"
-msgstr ""
-
-#: evaluations/templates/evaluations/waiting_acceptance_evaluations.html:10
-msgid "type"
-msgstr ""
-
-#: evaluations/templates/evaluations/waiting_acceptance_evaluations.html:11
-msgid "owner"
-msgstr ""
-
-#: evaluations/templates/evaluations/waiting_acceptance_evaluations.html:12
-msgid "subject"
-msgstr ""
-
-#: evaluations/templates/evaluations/waiting_acceptance_evaluations.html:13
-msgid "description"
-msgstr ""
-
-#: evaluations/templates/evaluations/waiting_acceptance_evaluations.html:24
-msgid "accepted"
-msgstr ""
-
-#: evaluations/templates/evaluations/waiting_acceptance_evaluations.html:29
-msgid "Have no  evaluations waiting acceptance"
-msgstr ""
+#~ msgid "Search"
+#~ msgstr "Procura"
