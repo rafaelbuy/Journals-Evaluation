@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+
+{% block stepmenu_top %}
+    {{ block.super }}
+    
+/ <a href="{% url evaluation.evaluations.index %}">{% trans 'Home' %}</a> / {{ flatpage.title }}
+
+{% endblock %}
+
+{% block page_title %}{{ flatpage.title }} - {{ block.super }}{% endblock %}
+
+{% block body %}
+    <br/>
+    <br/>
+    <h2>{% trans flatpage.title %}</h2>
+
+    {{ flatpage.content|linebreaks }}
+
+{% endblock %}

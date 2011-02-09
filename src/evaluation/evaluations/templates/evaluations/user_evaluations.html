@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block extrahead %}
+<link rel="stylesheet" type="text/css" href="/static/css/tablesorter/style.css"/>
+<script type="text/javascript" src="/static/js/jquery.tablesorter.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    // call the tablesorter plugin
+    $("#table_evaluations").tablesorter({
+        sortList: [[0,1]],
+        dateFormat: 'uk',
+        textExtraction: 'complex',
+        headers: { 6: { sorter: false}},
+    });
+});
+</script>
+{% endblock %}
+
+{% block body_title %}{% trans "User Evaluations" %}{% endblock %}
+
+{% block stepmenu_top %}
+    {{ block.super }}
+{% endblock %}
+
+{% block body %}
+
+<div class="actions"><a href="{% url evaluation.open %}" class="addNew">{% trans 'New Ingress' %}</a></div>
+<table class="dataTable" id="table_evaluations" cellspacing="0" border="0">
+    <thead>
+    <tr>
+        <th>{% trans "Date" %}</th>
+        <th>{% trans "ISSN" %}</th>
+        <th>{% trans "Journal Title" %}</th>
+        <th>{% trans "Institution" %}</th>
+        <th>{% trans "Process" %}</th>
+        <th>{% trans "Description" %}</th>
+        <th>{% trans "Creator" %}</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+{% for ct in user_evaluations %}
+    <tr class="{% cycle 'even' 'odd' %}">
+        <td class="date">{{ ct.created|date:'Y/m/d H:i' }}</td>
+        <td class="subject">{{ ct.issn }}</td>
+        <td class="subject">{{ ct.journal_title }}</td>
+        <td class="subject">{{ ct.institution }}</td>
+        <td>{{ ct.type }}</td>
+        <td width="30%">{{ ct.description }}</td>
+        <td>{{ ct.creator }}</td>
+        <td>
+            <ul>
+                <li><a class="history" href="/evaluation/history/{{ ct.pk }}/" title="{% trans 'view history' %}"><span>{% trans "view history" %}</span></a></li>
+                {% if ct.is_closed or ct.is_resolved %}
+                {% else %}
+                <li><a class="iteraction" href="/evaluation/newiteration/{{ ct.pk }}/" title="{% trans 'add iteration' %}"><span>{% trans "add iteration" %}</span></a></li>
+                {% endif %}
+            </ul>
+        </td>
+
+    </tr>
+{% endfor %}
+    <tbody>
+</table>
+{% endblock %}
