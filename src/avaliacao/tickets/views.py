@@ -20,12 +20,6 @@ def index(request):
     c = RequestContext(request)
     return HttpResponse(t.render(c))
 
-def user_logout(request):
-    logout(request)
-    t = loader.get_template('tickets/home_tickets.html')
-    c = RequestContext(request)
-    return HttpResponse(t.render(c))
-
 def user_login(request):
 
     next = request.GET.get('next', None)
@@ -51,8 +45,15 @@ def user_login(request):
             return HttpResponse(t.render(c))
     else:
         t = loader.get_template('tickets/home_tickets.html')
-        c = RequestContext(request, {'next': next})
+        c = RequestContext(request, {'required': True, 'next': next})
         return HttpResponse(t.render(c))
+
+
+def user_logout(request):
+    logout(request)
+    t = loader.get_template('tickets/home_tickets.html')
+    c = RequestContext(request)
+    return HttpResponse(t.render(c))
 
 @login_required
 def user_index(request):

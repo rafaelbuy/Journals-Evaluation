@@ -108,7 +108,10 @@
                                  <div class="loginError">{% trans 'Your username and password did not match. Please try again.' %}</div>
                             {% endif %}
                             {% if active %}
-                                 <div class="loginError">{% trans 'Your account is not active. Please contact the SciELO Evaluation Team' %}</div>
+                                 <div class="loginError">{% trans 'Your account is not active. Please contact the SciELO or verify your e-mail' %}</div>
+                            {% endif %}
+                            {% if required %}
+                                 <div class="loginError">{% trans 'Please login on the system to see this page' %}</div>
                             {% endif %}
                         </div>
 
