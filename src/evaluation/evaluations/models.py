@@ -31,6 +31,7 @@ class Status(models.Model):
 class Evaluation(models.Model):
     class Meta:
         ordering = ['-created']
+        permissions = (("list_all_evaluation", "Can list all evaluation "),)
 
     creator = models.ForeignKey(User, related_name='evaluation_creator', editable=False,)
 

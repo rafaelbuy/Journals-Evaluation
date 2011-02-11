@@ -9,6 +9,7 @@ from django.utils.translation import ugettext as _
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.contrib.auth import logout, authenticate, login
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
 from evaluation.evaluations.models import Evaluation, Followup, Media, Type, Context, Status
 
@@ -60,36 +61,77 @@ def user_logout(request):
 
 @login_required
 def user_index(request):
-    user_evaluations = Evaluation.objects.filter(creator=request.user)[:20]
-    user_open_evaluations  = (i.opened_evaluations() for i in Evaluation.objects.all())
-    user_close_evaluations = (i.closed_evaluations() for i in Evaluation.objects.all())
-    request.session['count_evaluations_user'] = Evaluation.objects.filter(creator=request.user).count()
-    
+
+    # User without permission to list all evaluations
+    if not request.user.has_perm('evaluations.list_all_evaluation'):
+        request.session['count_evaluations_user'] = Evaluation.objects.filter(creator=request.user).count()
+        user_evaluations = Evaluation.objects.filter(creator=request.user)
+        paginator = Paginator(user_evaluations, 10) # Show 25 contacts per page
+
+        # Make sure page request is an int. If not, deliver first page.
+        try:
+            page = int(request.GET.get('page', '1'))
+        except ValueError:
+            page = 1
+
+        # If page request (9999) is out of range, deliver last page of results.
+        try:
+           evaluations = paginator.page(page)
+        except (EmptyPage, InvalidPage):
+           evaluations = paginator.page(paginator.num_pages)
+        
+    else:
+        user_evaluations = Evaluation.objects.all()
+        paginator = Paginator(user_evaluations, 10) # Show 25 contacts per page
+
+        try:
+            page = int(request.GET.get('page', '1'))
+        except ValueError:
+            page = 1
+
+        # If page request (9999) is out of range, deliver last page of results.
+        try:
+           evaluations = paginator.page(page)
+        except (EmptyPage, InvalidPage):
+           evaluations = paginator.page(paginator.num_pages)
+
+        request.session['count_evaluations_user'] = Evaluation.objects.all().count()
+        
     t = loader.get_template('evaluations/user_evaluations.html')
     c = RequestContext(request, {
-        'user_evaluations': user_evaluations,
-        'user_open_evaluations': user_open_evaluations,
-        'choices': choices,
-        'user_close_evaluations': user_close_evaluations,
+        'user_evaluations': evaluations,
     })
     return HttpResponse(t.render(c))
 
+
+def search(request):
+    
+    q=request.GET.get('q')
+
+    user_evaluations = Evaluation.objects.filter(issn=q)
+    paginator = Paginator(user_evaluations, 10) # Show 25 contacts per page
+
+    try:
+        page = int(request.GET.get('page', '1'))
+    except ValueError:
+        page = 1
+
+    # If page request (9999) is out of range, deliver last page of results.
+    try:
+       evaluations = paginator.page(page)
+    except (EmptyPage, InvalidPage):
+       evaluations = paginator.page(paginator.num_pages)
+
+    t = loader.get_template('evaluations/user_evaluations.html')
+    c = RequestContext(request, {
+        'user_evaluations': evaluations,
+    })
+    return HttpResponse(t.render(c))
 
 def get_context(request, type_id):
     contexts = Context.objects.filter(type=type_id)
     retorno = serializers.serialize("json", contexts)
     return HttpResponse(retorno, mimetype="text/javascript")
-
-@login_required
-def waiting_acceptance(request):
-    fw_waiting = Followup.objects.filter(status = 'new', evaluation__type='review')
-    t = loader.get_template('evaluations/waiting_acceptance_evaluations.html')
-    c = RequestContext(request, {
-        'fw_waiting': fw_waiting,
-        'choices': choices,
-        'username': request.user.username,
-    })
-    return HttpResponse(t.render(c))
 
 
 @login_required

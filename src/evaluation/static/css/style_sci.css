@@ -50,12 +50,19 @@ blockquote {
     height: 1px;
 }
 .textEntry {
-    width: 110px;
+    width: 250px;
     border: 1px solid #848484;
-    background: url(../images/input_bg.gif) no-repeat;
+    background:  #EFEFEF;
+    /*background: url(../images/input_bg.gif) no-repeat;*/
 }
 .textEntryFocus {
+    width: 250px;
     border: 1px solid #0c4762;
+}
+
+.searchtext{
+    margin-left: 19px;
+    color: #DDDFE0;
 }
 
 /* STYLE for BORDERED MAIN BLOCKS */
@@ -274,15 +281,16 @@ blockquote {
     text-decoration: underline;
 }
 .search {
-    margin-top: 18px;
+    margin-top: 28px;
+    margin-left:13px;
 }
 .search .submit {
     background: url(../images/submit_search.gif) no-repeat;
     color: #1c4507;
-    text-transform: uppercase;
-    font-size: 80%;
+    /*text-transform: uppercase;*/
+    /*&font-size: 80%;*/
     border: 0px;
-    padding: 4px;
+    /*padding: 4px;*/
     width: 61px;
     height: 20px;
 }
@@ -864,4 +872,14 @@ legend{
 .selected_language {
    font-weight: bold;
    text-decoration: underline;
+}
+
+/*paginator*/
+
+.pagination{
+    float:right;
+}
+
+.pagination a{
+    
 }

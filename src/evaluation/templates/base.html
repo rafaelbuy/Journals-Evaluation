@@ -114,13 +114,16 @@
                                  <div class="loginError">{% trans 'Please login on the system to see this page' %}</div>
                             {% endif %}
                         </div>
-
-            <div class="spacer">&#160;</div>
+                    <div class="spacer">&#160;</div>
                     </div>
                     {% endif %}
                     <div class="topMenu">
                         <ul>
-                            {% if user.is_authenticated %}<li><a href="{% url evaluation.user_index %}">{% trans 'Ingress' %}</a></li>{% endif %}
+                            {% if user.is_authenticated %}
+                            <li>
+                               <a href="{% url evaluation.user_index %}">{% trans 'Ingress' %}</a>
+                            </li>
+                            {% endif %}
 
                             {% if request.LANGUAGE_CODE == 'pt-br' %}<li><a href="/documentation/pt/">{% trans 'Documentation' %}</a></li>{% endif %}
                             {% if request.LANGUAGE_CODE == 'es' %}<li><a href="/documentation/es/">{% trans 'Documentation' %}</a></li>{% endif %}
@@ -143,6 +146,13 @@
                             {% if request.LANGUAGE_CODE == 'en' %} <li><a href="/help/en/">{% trans "Help" %}</a></li>{% endif %}
                         </ul>
                     </div>
+                    <div class="search">
+                            <form action="{% url evaluation.search %}" method="get">
+                                <input type="text" name="q" class="textEntry" id="search" onblur="this.className = 'textEntry';" onfocus="this.className = 'textEntryFocus';" />
+                            <input type="submit" class="submit" value="{% trans 'Search' %}" />
+                        </form>
+                    </div>
+                    <div class="searchtext">{% trans 'Search: ISSN, Journal Title and Institution'%}</div>
                 </div>
                 {% endblock %}
                 <div class="spacer">&#160;</div>

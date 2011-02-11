@@ -9,8 +9,8 @@ info_dict = {
 
 urlpatterns = patterns('',
     url(r'^$', user_index, name="evaluation.user_index"),
+    url(r'^search/$', search, name="evaluation.search"),
     url(r'^list/$', object_list, info_dict, name="evaluation.list"),
-    url(r'^list_waiting/$', waiting_acceptance, name="evaluation.waiting_acceptance"),
     url(r'^history/(?P<object_id>\d+)/$', object_detail, info_dict, name='evaluation.history' ),
     url(r'^open/$', open_evaluation, name='evaluation.open' ),
     url(r'^reopen/(?P<object_id>\d+)/$', reopen_evaluation, name='evaluation.reopen' ),
