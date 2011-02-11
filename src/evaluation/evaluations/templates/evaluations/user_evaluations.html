@@ -70,7 +70,11 @@ $(document).ready(function() {
 <div class="pagination">
     <span class="step-links">
         {% if user_evaluations.has_previous %}
-            <a href="?page={{ user_evaluations.previous_page_number }}">{% trans "previous" %}</a>
+            {% if search %}
+                <a href="?page={{ user_evaluations.previous_page_number }}&q={{q}}">{% trans "previous" %}</a>
+             {% else %}
+                <a href="?page={{ user_evaluations.previous_page_number }}">{% trans "previous" %}</a>
+            {% endif %}
         {% endif %}
 
         <span class="current">
@@ -78,7 +82,11 @@ $(document).ready(function() {
         </span>
 
         {% if user_evaluations.has_next %}
-            <a href="?page={{ user_evaluations.next_page_number }}">{% trans "next" %}</a>
+            {% if search %}
+                <a href="?page={{ user_evaluations.next_page_number }}&q={{q}}">{% trans "next" %}</a>
+             {% else %}
+                <a href="?page={{ user_evaluations.next_page_number }}">{% trans "next" %}</a>
+            {% endif %}
         {% endif %}
     </span>
 </div>

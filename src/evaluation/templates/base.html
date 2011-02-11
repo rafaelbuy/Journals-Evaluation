@@ -146,13 +146,15 @@
                             {% if request.LANGUAGE_CODE == 'en' %} <li><a href="/help/en/">{% trans "Help" %}</a></li>{% endif %}
                         </ul>
                     </div>
+                    {% if user.is_authenticated %}
                     <div class="search">
                             <form action="{% url evaluation.search %}" method="get">
-                                <input type="text" name="q" class="textEntry" id="search" onblur="this.className = 'textEntry';" onfocus="this.className = 'textEntryFocus';" />
+                                <input type="text" name="q" class="textEntrySearch" id="search" onblur="this.className = 'textEntrySearch';" onfocus="this.className = 'textEntryFocusSearch';" />
                             <input type="submit" class="submit" value="{% trans 'Search' %}" />
                         </form>
                     </div>
                     <div class="searchtext">{% trans 'Search: ISSN, Journal Title and Institution'%}</div>
+                    {% endif %}
                 </div>
                 {% endblock %}
                 <div class="spacer">&#160;</div>

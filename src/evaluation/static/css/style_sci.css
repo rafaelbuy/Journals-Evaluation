@@ -50,12 +50,23 @@ blockquote {
     height: 1px;
 }
 .textEntry {
-    width: 250px;
+    width: 110px;
     border: 1px solid #848484;
     background:  #EFEFEF;
     /*background: url(../images/input_bg.gif) no-repeat;*/
 }
 .textEntryFocus {
+    width: 110px;
+    border: 1px solid #0c4762;
+}
+
+.textEntrySearch {
+    width: 250px;
+    border: 1px solid #848484;
+    background:  #EFEFEF;
+    /*background: url(../images/input_bg.gif) no-repeat;*/
+}
+.textEntryFocusSearch {
     width: 250px;
     border: 1px solid #0c4762;
 }
@@ -288,7 +299,7 @@ blockquote {
     background: url(../images/submit_search.gif) no-repeat;
     color: #1c4507;
     /*text-transform: uppercase;*/
-    /*&font-size: 80%;*/
+    font-size: 80%;
     border: 0px;
     /*padding: 4px;*/
     width: 61px;

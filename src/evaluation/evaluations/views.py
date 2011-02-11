@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.contrib.auth import logout, authenticate, login
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
+from django.db.models import Q
 
 from evaluation.evaluations.models import Evaluation, Followup, Media, Type, Context, Status
 
@@ -103,13 +104,14 @@ def user_index(request):
     })
     return HttpResponse(t.render(c))
 
-
+@login_required
 def search(request):
     
     q=request.GET.get('q')
 
-    user_evaluations = Evaluation.objects.filter(issn=q)
-    paginator = Paginator(user_evaluations, 10) # Show 25 contacts per page
+    user_evaluations = Evaluation.objects.filter(Q(issn=q) | Q(journal_title=q)
+                                        | Q(institution=q))
+    paginator = Paginator(user_evaluations, 10) # Show 10 evaluations per page
 
     try:
         page = int(request.GET.get('page', '1'))
@@ -125,6 +127,8 @@ def search(request):
     t = loader.get_template('evaluations/user_evaluations.html')
     c = RequestContext(request, {
         'user_evaluations': evaluations,
+        'search': True,
+        'q':q
     })
     return HttpResponse(t.render(c))
 
