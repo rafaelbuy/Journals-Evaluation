@@ -1,4 +1,4 @@
-src/avaliacao/static/files/*
-src/avaliacao/settings.py
+src/evaluation/static/files/*
+src/evaluation/settings.py
 nbproject
 *.pyc
