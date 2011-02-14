@@ -69,7 +69,7 @@
     {% endif %}
 </fieldset>
 {% if not object.followup_set.latest.status %}
-    <div id="attention" style="color:red">{% trans "Please click on link 'Add iteration' to send files for SciELO Team" %}</div>
+    <div id="attention" style="color:red">{% trans "Please click on link 'Add iteration' to send files to SciELO Team" %}</div>
 {% endif %}
 {% if object.followup_set.all %}
     <fieldset>

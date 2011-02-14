@@ -1,4 +1,3 @@
-# Create your views here.
 from django.template import loader
 from django.template.context import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
@@ -13,9 +12,6 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.db.models import Q
 
 from evaluation.evaluations.models import Evaluation, Followup, Media, Type, Context, Status
-
-import choices
-
 
 def index(request):
     t = loader.get_template('evaluations/home_evaluations.html')
@@ -108,9 +104,14 @@ def user_index(request):
 def search(request):
     
     q=request.GET.get('q')
+    
+    if not request.user.has_perm('evaluations.list_all_evaluation'):
+        user_evaluations = Evaluation.objects.filter(creator=request.user).filter(Q(issn__contains=q) | Q(journal_title__contains=q)
+                                        | Q(institution__contains=q))
+    else:
+        user_evaluations = Evaluation.objects.filter(Q(issn__contains=q) | Q(journal_title__contains=q)
+                                        | Q(institution__contains=q))
 
-    user_evaluations = Evaluation.objects.filter(Q(issn=q) | Q(journal_title=q)
-                                        | Q(institution=q))
     paginator = Paginator(user_evaluations, 10) # Show 10 evaluations per page
 
     try:
@@ -136,7 +137,6 @@ def get_context(request, type_id):
     contexts = Context.objects.filter(type=type_id)
     retorno = serializers.serialize("json", contexts)
     return HttpResponse(retorno, mimetype="text/javascript")
-
 
 @login_required
 def reopen_evaluation(request, object_id):
@@ -217,18 +217,32 @@ class FollowupParcForm(forms.Form):
     Context = forms.ModelChoiceField(label=_('Context'), required=True,
                                         queryset=Context.objects.none())
 
+    Status = forms.ModelChoiceField(label=_('Status'), required=False,
+                                        queryset=Status.objects.none())
+                                        
     description = forms.CharField(label=_('Description'),widget=forms.Textarea(
                                     attrs={'rows':'15','cols':'70',}))
 
     def __init__(self, *args, **kwargs):
-        type = kwargs.pop('evaluation_type_id', None)
+        evaluation_dict = kwargs.pop('evaluation_dict', None)
+        
         super(FollowupParcForm, self).__init__(*args, **kwargs)
-        if type:
+
+        if evaluation_dict['id']:
             self.fields['Context'].queryset = Context.objects.filter(
-                                           type=type['id'])
+                                           type=evaluation_dict['id'])
+
+        if evaluation_dict['can_set_status']:
+            self.fields['Status'].queryset = Status.objects.filter(
+                                           type=evaluation_dict['id'])
+        if not evaluation_dict['can_set_status']:
+            self.fields['Status'].widget = forms.HiddenInput()
+                                           
+
+    
 @login_required
 def new_iteration(request, object_id):
-    
+
     #get the evaluation by id or 404 error
     evaluation = get_object_or_404(Evaluation, id=int(object_id))
 
@@ -237,24 +251,32 @@ def new_iteration(request, object_id):
 
         #create the set of media
         MediaInlineSet = inlineformset_factory(Followup, Media, extra=3)
-
-        evaluation_type_id = {'id': evaluation.type}
+   
+        evaluation_dict = {'id': evaluation.type,
+        'can_set_status': request.user.has_perm('evaluations.can_set_status')}
 
         form_followup = FollowupParcForm(request.POST, request.FILES,
-                       evaluation_type_id=evaluation_type_id)
-
+                       evaluation_dict=evaluation_dict)
+        
         if form_followup.is_valid():
 
             user = request.user
             desc = form_followup.cleaned_data['description']
             subject = form_followup.cleaned_data['subject']
             context = form_followup.cleaned_data['Context']
-            
-            try:
-                fw_lt = evaluation.followup_set.latest()
-                status = fw_lt.status
-            except Exception:
-                status = Status.objects.get(pk=1)
+
+            if not request.user.has_perm('evaluations.can_set_status'):
+                
+                try:
+                    fw_lt = evaluation.followup_set.latest()
+                    status = fw_lt.status
+                except Exception:
+                    #fixme: get the first status without id number
+                    status = Status.objects.get(pk=1)
+                    
+            else:
+                status = form_followup.cleaned_data['Status']
+
 
             fw_nw = Followup(evaluation=evaluation, status=status, context=context,
                 description=desc, subject=subject,
@@ -264,17 +286,18 @@ def new_iteration(request, object_id):
                          instance=fw_nw)
 
             fw_nw.save()
-            
+
             if forms_media.is_valid():
                 forms_media.save()
 
         return HttpResponseRedirect(evaluation.get_absolute_url())
     else:
-
-        evaluation_type_id = {'id': evaluation.type}
+        
+        evaluation_dict = {'id': evaluation.type,
+        'can_set_status': request.user.has_perm('evaluations.can_set_status')}
         
         #create the form for Followup
-        form_followup = FollowupParcForm(evaluation_type_id=evaluation_type_id)
+        form_followup = FollowupParcForm(evaluation_dict=evaluation_dict)
 
         #object NAMEInLineSet
         #about http://docs.djangoproject.com/en/dev/topics/forms/modelforms/
@@ -355,4 +378,3 @@ def open_evaluation(request):
         'mode': 'open_evaluation',
         'user_name': request.user.pk},
         context_instance=RequestContext(request))
-
