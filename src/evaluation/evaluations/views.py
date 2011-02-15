@@ -6,7 +6,6 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django import forms
 from django.utils.translation import ugettext as _
 from django.contrib.auth.decorators import login_required
-from django.core import serializers
 from django.contrib.auth import logout, authenticate, login
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.db.models import Q
@@ -132,82 +131,6 @@ def search(request):
         'q':q
     })
     return HttpResponse(t.render(c))
-
-def get_context(request, type_id):
-    contexts = Context.objects.filter(type=type_id)
-    retorno = serializers.serialize("json", contexts)
-    return HttpResponse(retorno, mimetype="text/javascript")
-
-@login_required
-def reopen_evaluation(request, object_id):
-    evaluation = get_object_or_404(Evaluation, id=int(object_id))
-    followup_latest = evaluation.followup_set.latest()
-    followup_new = Followup(evaluation=evaluation, status='reopened',
-                  description=followup_latest.description,
-                  subject=followup_latest.subject,
-                  reported_by=followup_latest.reported_by )
-    followup_new.save();
-
-    return HttpResponseRedirect(evaluation.get_absolute_url())
-
-@login_required
-def close_evaluation(request, object_id):
-    evaluation = get_object_or_404(Evaluation, id=int(object_id))
-    followup_latest = evaluation.followup_set.latest()
-    followup_new = Followup(evaluation=evaluation, status='closed',
-                 description=followup_latest.description,
-                 subject=followup_latest.subject,
-                 reported_by=followup_latest.reported_by )
-    followup_new.save();
-
-    return HttpResponseRedirect(evaluation.get_absolute_url())
-
-
-@login_required
-def resolve_evaluation(request, object_id):
-    evaluation = get_object_or_404(Evaluation, id=int(object_id))
-    if request.method == 'POST': # If the forms were submitted...
-        form = FollowupParcForm(request.POST)
-        if form.is_valid():
-            desc = form.cleaned_data['description']
-            fw_lt = evaluation.followup_set.latest()
-            fw_nw = Followup(evaluation=evaluation, status='resolved',
-                description=desc, subject=fw_lt.subject ,
-                reported_by=fw_lt.reported_by, to_user=fw_lt.to_user, )
-            fw_nw.save()
-            
-        return HttpResponseRedirect(evaluation.get_absolute_url())
-    else:
-        form = FollowupParcForm()
-        forms = dict(form_followup=form, mode = 'resolve', evaluation=evaluation,
-        username=request.user.username)
-        return render_to_response('evaluations/new_iteration.html', forms,
-                                context_instance=RequestContext(request))
-
-@login_required
-def accept_evaluation(request, object_id):
-    if request.method == 'POST': # If the forms were submitted...
-        form = FollowupParcForm(request.POST)
-        if form.is_valid():
-            user =  request.user
-            desc = form.cleaned_data['description']
-            evaluation = get_object_or_404(Evaluation, id=int(object_id))
-            fw_lt = evaluation.followup_set.latest()
-            fw_nw = Followup(evaluation=evaluation, status='accepted',
-                description=desc, subject=fw_lt.subject ,
-                reported_by=fw_lt.reported_by, to_user=user, )
-            fw_nw.save()
-
-        return HttpResponseRedirect(evaluation.get_absolute_url())
-    else:
-        # recovering Evaluation Data to input form fields
-        followup_form = FollowupParcForm() # An unbound form
-        return render_to_response('evaluations/new_iteration.html', {
-            'iteration_form': followup_form,
-            'evaluation_id': object_id,
-            'mode': 'accept'},
-            context_instance=RequestContext(request))
-
 
 class FollowupParcForm(forms.Form):
 
