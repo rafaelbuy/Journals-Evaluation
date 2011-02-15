@@ -96,6 +96,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'evaluation.urls'
@@ -129,6 +130,7 @@ INSTALLED_APPS = (
     'evaluations',
     'registration',
     'rosetta',
+    'debug_toolbar',
     )
 
 TEMPLATE_CONTEXT_PROCESSORS =(
@@ -140,3 +142,7 @@ TEMPLATE_CONTEXT_PROCESSORS =(
 )
 
 FIXTURE_DIRS = ('fixtures',)
+
+INTERNAL_IPS = ('127.0.0.1',)
+
+DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False}
