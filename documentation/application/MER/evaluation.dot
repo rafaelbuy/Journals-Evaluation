@@ -18,7 +18,7 @@ fontsize = 8
 
 
 
-tickets_models_Type [label=<
+evaluations_models_Type [label=<
 <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
 <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
 ><FONT FACE="Helvetica Bold" COLOR="white"
@@ -44,7 +44,7 @@ tickets_models_Type [label=<
 </TABLE>
 >]
 
-tickets_models_Context [label=<
+evaluations_models_Context [label=<
 <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
 <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
 ><FONT FACE="Helvetica Bold" COLOR="white"
@@ -77,7 +77,7 @@ tickets_models_Context [label=<
 </TABLE>
 >]
 
-tickets_models_Status [label=<
+evaluations_models_Status [label=<
 <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
 <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
 ><FONT FACE="Helvetica Bold" COLOR="white"
@@ -110,11 +110,11 @@ tickets_models_Status [label=<
 </TABLE>
 >]
 
-tickets_models_Ticket [label=<
+evaluations_models_Evaluation [label=<
 <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
 <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
 ><FONT FACE="Helvetica Bold" COLOR="white"
->Ticket</FONT></TD></TR>
+>Evaluation</FONT></TD></TR>
 
 
 
@@ -178,7 +178,7 @@ tickets_models_Ticket [label=<
 </TABLE>
 >]
 
-tickets_models_Followup [label=<
+evaluations_models_Followup [label=<
 <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
 <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
 ><FONT FACE="Helvetica Bold" COLOR="white"
@@ -194,7 +194,7 @@ tickets_models_Followup [label=<
 ></TD></TR>
 
 <TR><TD ALIGN="LEFT" BORDER="0"
-><FONT FACE="Helvetica Bold">ticket</FONT
+><FONT FACE="Helvetica Bold">evaluation</FONT
 ></TD>
 <TD ALIGN="LEFT"
 ><FONT FACE="Helvetica Bold">ForeignKey</FONT
@@ -253,7 +253,7 @@ tickets_models_Followup [label=<
 </TABLE>
 >]
 
-tickets_models_Media [label=<
+evaluations_models_Media [label=<
 <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
 <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
 ><FONT FACE="Helvetica Bold" COLOR="white"
@@ -295,13 +295,13 @@ tickets_models_Media [label=<
 
 
 
-tickets_models_Context -> tickets_models_Type
+evaluations_models_Context -> evaluations_models_Type
 [label="type"] ;
 
 
 
 
-tickets_models_Status -> tickets_models_Type
+evaluations_models_Status -> evaluations_models_Type
 [label="type"] ;
 
 
@@ -315,18 +315,18 @@ django_contrib_auth_models_User [label=<
 </TABLE>
 >]
 
-tickets_models_Ticket -> django_contrib_auth_models_User
+evaluations_models_Evaluation -> django_contrib_auth_models_User
 [label="creator"] ;
 
 
-tickets_models_Ticket -> tickets_models_Type
+evaluations_models_Evaluation -> evaluations_models_Type
 [label="type"] ;
 
 
 
 
-tickets_models_Followup -> tickets_models_Ticket
-[label="ticket"] ;
+evaluations_models_Followup -> evaluations_models_Evaluation
+[label="evaluation"] ;
 
 
 django_contrib_auth_models_User [label=<
@@ -337,21 +337,21 @@ django_contrib_auth_models_User [label=<
 </TABLE>
 >]
 
-tickets_models_Followup -> django_contrib_auth_models_User
+evaluations_models_Followup -> django_contrib_auth_models_User
 [label="reported_by"] ;
 
 
-tickets_models_Followup -> tickets_models_Status
+evaluations_models_Followup -> evaluations_models_Status
 [label="status"] ;
 
 
-tickets_models_Followup -> tickets_models_Context
+evaluations_models_Followup -> evaluations_models_Context
 [label="context"] ;
 
 
 
 
-tickets_models_Media -> tickets_models_Followup
+evaluations_models_Media -> evaluations_models_Followup
 [label="followup"] ;
 
 
