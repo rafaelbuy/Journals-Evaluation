@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-09 18:51+0000\n"
+"POT-Creation-Date: 2011-02-16 18:35+0000\n"
 "PO-Revision-Date: 2011-02-09 18:53\n"
 "Last-Translator: Jamil  Atta <atta.jamil@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,15 +17,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Translated-Using: django-rosetta 0.5.6\n"
 
-#: settings.TEMPLATES.py:55 settings.py:55
+#: settings.TEMPLATES.py:55
 msgid "English"
 msgstr "Inglês"
 
-#: settings.TEMPLATES.py:56 settings.py:56
+#: settings.TEMPLATES.py:56
 msgid "Español"
 msgstr "Espanhol"
 
-#: settings.TEMPLATES.py:57 settings.py:57
+#: settings.TEMPLATES.py:57
 msgid "Portuguese"
 msgstr "Português"
 
@@ -33,67 +33,93 @@ msgstr "Português"
 msgid "Processo"
 msgstr ""
 
-#: evaluations/models.py:18 evaluations/views.py:171
+#: evaluations/models.py:18 evaluations/views.py:154
 #: evaluations/templates/evaluations/evaluation_detail.html:81
 msgid "Context"
 msgstr ""
 
-#: evaluations/models.py:26
+#: evaluations/models.py:26 evaluations/views.py:157
 #: evaluations/templates/evaluations/evaluation_detail.html:38
 #: evaluations/templates/evaluations/evaluation_detail.html:82
+#: evaluations/templates/evaluations/user_evaluations.html:41
 msgid "Status"
 msgstr ""
 
-#: evaluations/models.py:40
+#: evaluations/models.py:42
 #: evaluations/templates/evaluations/new_iteration.html:24
 msgid "Date of Registration"
 msgstr ""
 
-#: evaluations/models.py:43 evaluations/views.py:254
+#: evaluations/models.py:45 evaluations/views.py:278
 #: evaluations/templates/evaluations/evaluation_detail.html:35
-#: evaluations/templates/evaluations/user_evaluations.html:36
+#: evaluations/templates/evaluations/user_evaluations.html:38
 msgid "Institution"
 msgstr ""
 
-#: evaluations/models.py:45 evaluations/views.py:257
+#: evaluations/models.py:47 evaluations/views.py:281
 #: evaluations/templates/evaluations/evaluation_detail.html:33
-#: evaluations/templates/evaluations/user_evaluations.html:34
+#: evaluations/templates/evaluations/user_evaluations.html:36
 msgid "ISSN"
 msgstr ""
 
-#: evaluations/models.py:47 evaluations/views.py:251
+#: evaluations/models.py:49 evaluations/views.py:275
 #: evaluations/templates/evaluations/evaluation_detail.html:34
-#: evaluations/templates/evaluations/user_evaluations.html:35
+#: evaluations/templates/evaluations/user_evaluations.html:37
 msgid "Journal Title"
 msgstr ""
 
-#: evaluations/models.py:50 evaluations/models.py:103 evaluations/views.py:174
-#: evaluations/views.py:263
+#: evaluations/models.py:52 evaluations/models.py:105 evaluations/views.py:160
+#: evaluations/views.py:287
 #: evaluations/templates/evaluations/evaluation_detail.html:37
 #: evaluations/templates/evaluations/evaluation_detail.html:80
-#: evaluations/templates/evaluations/user_evaluations.html:38
+#: evaluations/templates/evaluations/user_evaluations.html:40
 msgid "Description"
 msgstr ""
 
-#: evaluations/models.py:98
+#: evaluations/models.py:100
 msgid "Date of Iteration"
 msgstr ""
 
-#: evaluations/models.py:101 evaluations/views.py:168
+#: evaluations/models.py:103 evaluations/views.py:151
 msgid "Subject"
 msgstr ""
 
-#: evaluations/models.py:108
+#: evaluations/models.py:110
 msgid "To User (e-mail)"
 msgstr ""
 
-#: evaluations/models.py:131
+#: evaluations/models.py:133
 msgid "Upload File"
 msgstr ""
 
-#: evaluations/views.py:260
+#: evaluations/views.py:229
+msgid "Notification of change in SciELO Evaluation (Dont replay this message)"
+msgstr ""
+
+#: evaluations/views.py:235
+msgid "Hi, "
+msgstr ""
+
+#: evaluations/views.py:236
+msgid "Your evaluation changed the status"
+msgstr ""
+
+#: evaluations/views.py:237
+msgid "Please access your the evaluation: "
+msgstr ""
+
+#: evaluations/views.py:239
+#, fuzzy
+msgid "SciELO Evaluation Team"
+msgstr "SciELO Avaliação"
+
+#: evaluations/views.py:240
+msgid "scielo.avaliacao@scielo.org"
+msgstr ""
+
+#: evaluations/views.py:284
 #: evaluations/templates/evaluations/evaluation_detail.html:36
-#: evaluations/templates/evaluations/user_evaluations.html:37
+#: evaluations/templates/evaluations/user_evaluations.html:39
 msgid "Process"
 msgstr ""
 
@@ -101,7 +127,8 @@ msgstr ""
 #: evaluations/templates/evaluations/evaluation_detail.html:28
 #: evaluations/templates/evaluations/new_iteration.html:6
 #: evaluations/templates/evaluations/open_evaluation.html:6
-#: templates/base.html:123
+#: evaluations/templates/evaluations/user_evaluations.html:26
+#: templates/base.html:124
 msgid "Ingress"
 msgstr "Pedido de Avaliação"
 
@@ -118,7 +145,7 @@ msgid "Update"
 msgstr ""
 
 #: evaluations/templates/evaluations/evaluation_detail.html:40
-#: evaluations/templates/evaluations/user_evaluations.html:39
+#: evaluations/templates/evaluations/user_evaluations.html:42
 msgid "Creator"
 msgstr ""
 
@@ -139,7 +166,7 @@ msgid "Evaluation not found"
 msgstr ""
 
 #: evaluations/templates/evaluations/evaluation_detail.html:72
-msgid "Please click on link 'Add iteration' to send files for SciELO Team"
+msgid "Please click on link 'Add iteration' to send files to SciELO Team"
 msgstr ""
 
 #: evaluations/templates/evaluations/evaluation_detail.html:76
@@ -159,7 +186,9 @@ msgid "Reported by"
 msgstr ""
 
 #: evaluations/templates/evaluations/evaluation_detail.html:107
-msgid "To show the \"add iteration button\" the evaluation must be diferente from \"closed\"."
+msgid ""
+"To show the \"add iteration button\" the evaluation must be diferente from "
+"\"closed\"."
 msgstr ""
 
 #: evaluations/templates/evaluations/evaluation_list.html:15
@@ -197,7 +226,7 @@ msgid "Open Ingress"
 msgstr ""
 
 #: evaluations/templates/evaluations/open_evaluation.html:12
-#: evaluations/templates/evaluations/user_evaluations.html:29
+#: evaluations/templates/evaluations/user_evaluations.html:31
 msgid "New Ingress"
 msgstr ""
 
@@ -205,16 +234,33 @@ msgstr ""
 msgid "Add Ingress"
 msgstr ""
 
-#: evaluations/templates/evaluations/user_evaluations.html:33
+#: evaluations/templates/evaluations/user_evaluations.html:25
+#: templates/flatpages/default.html:8
+#: templates/registration/password_reset_form.html:6
+#: templates/registration/registration_form.html:6
+msgid "Home"
+msgstr ""
+
+#: evaluations/templates/evaluations/user_evaluations.html:35
 msgid "Date"
 msgstr ""
 
-#: evaluations/templates/evaluations/user_evaluations.html:55
+#: evaluations/templates/evaluations/user_evaluations.html:59
 msgid "view history"
 msgstr ""
 
-#: evaluations/templates/evaluations/user_evaluations.html:58
+#: evaluations/templates/evaluations/user_evaluations.html:62
 msgid "add iteration"
+msgstr ""
+
+#: evaluations/templates/evaluations/user_evaluations.html:74
+#: evaluations/templates/evaluations/user_evaluations.html:76
+msgid "Previous"
+msgstr ""
+
+#: evaluations/templates/evaluations/user_evaluations.html:86
+#: evaluations/templates/evaluations/user_evaluations.html:88
+msgid "Next"
 msgstr ""
 
 #: evaluations/templates/evaluations/waiting_acceptance_evaluation.html:8
@@ -258,7 +304,9 @@ msgid "Internal Server Error (500)"
 msgstr ""
 
 #: templates/500.html:8
-msgid "The server encountered an unexpected condition which prevented it from fulfilling the request."
+msgid ""
+"The server encountered an unexpected condition which prevented it from "
+"fulfilling the request."
 msgstr ""
 
 #: templates/base.html:7
@@ -307,37 +355,44 @@ msgid "Your username and password did not match. Please try again."
 msgstr ""
 
 #: templates/base.html:111
-msgid "Your account is not active. Please contact the SciELO or verify your e-mail"
+msgid ""
+"Your account is not active. Please contact the SciELO or verify your e-mail"
 msgstr ""
 
 #: templates/base.html:114
 msgid "Please login on the system to see this page"
 msgstr ""
 
-#: templates/base.html:125 templates/base.html.py:126 templates/base.html:127
+#: templates/base.html:128 templates/base.html.py:129 templates/base.html:130
 msgid "Documentation"
 msgstr ""
 
-#: templates/base.html:129 templates/base.html.py:130 templates/base.html:131
+#: templates/base.html:132 templates/base.html.py:133 templates/base.html:134
 msgid "About"
 msgstr "Sobre"
 
-#: templates/base.html:133 templates/base.html.py:134 templates/base.html:135
+#: templates/base.html:136 templates/base.html.py:137 templates/base.html:138
 msgid "FAQ"
 msgstr ""
 
-#: templates/base.html:137 templates/base.html.py:138 templates/base.html:139
+#: templates/base.html:140 templates/base.html.py:141 templates/base.html:142
 msgid "News"
 msgstr "Notícias"
 
-#: templates/base.html:141 templates/base.html.py:142 templates/base.html:143
+#: templates/base.html:144 templates/base.html.py:145 templates/base.html:146
 msgid "Help"
 msgstr "Ajuda"
 
-#: templates/flatpages/default.html:8
-#: templates/registration/password_reset_form.html:6
-#: templates/registration/registration_form.html:6
-msgid "Home"
+#: templates/base.html:153
+msgid "Search"
+msgstr "Procura"
+
+#: templates/base.html:156
+msgid "Search: ISSN, Journal Title and Institution"
+msgstr ""
+
+#: templates/base.html:171
+msgid "SciELO - Scientific Electronic Library Online"
 msgstr ""
 
 #: templates/registration/activate.html:6
@@ -385,7 +440,9 @@ msgid "E-mail sent"
 msgstr ""
 
 #: templates/registration/password_reset_done.html:12
-msgid "We have sent you an email with a link to reset your password. Please check your email and click the link to continue."
+msgid ""
+"We have sent you an email with a link to reset your password. Please check "
+"your email and click the link to continue."
 msgstr ""
 
 #: templates/registration/password_reset_email.html:4
@@ -402,12 +459,15 @@ msgid ""
 "and you can access your account now:\n"
 "http://%(domain)s\n"
 "\n"
-"To reset your password, please click the following link, or copy and paste it\n"
+"To reset your password, please click the following link, or copy and paste "
+"it\n"
 "into your web browser:\n"
 msgstr ""
 
 #: templates/registration/password_reset_form.html:12
-msgid "Enter your e-mail in the form below and we will send your username and instructions to create a new password."
+msgid ""
+"Enter your e-mail in the form below and we will send your username and "
+"instructions to create a new password."
 msgstr ""
 
 #: templates/registration/password_reset_form.html:16
@@ -419,7 +479,9 @@ msgid "A confirmation e-mail is on the way"
 msgstr ""
 
 #: templates/registration/registration_complete.html:8
-msgid "Please click the activation link included in the e-mail to confirm you registration."
+msgid ""
+"Please click the activation link included in the e-mail to confirm you "
+"registration."
 msgstr ""
 
 #: templates/registration/registration_form.html:9
@@ -430,8 +492,9 @@ msgstr ""
 msgid "You will receive an email with a link to activate your account."
 msgstr ""
 
+#, fuzzy
+#~ msgid "<p><b>SciELO Evaluation Team</b></p>"
+#~ msgstr "SciELO Avaliação"
+
 #~ msgid "Submissions"
 #~ msgstr "Submissão"
-
-#~ msgid "Search"
-#~ msgstr "Procura"
