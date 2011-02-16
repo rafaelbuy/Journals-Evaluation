@@ -24,6 +24,7 @@ from evaluation.evaluations.models import Followup
 from evaluation.evaluations.models import Media
 from evaluation.evaluations.models import Status
 from evaluation.evaluations.models import Type
+from django.contrib.auth.models import User
 
 
 def index(request):
@@ -226,16 +227,20 @@ def new_iteration(request, object_id):
 
             if request.user.has_perm('evaluations.can_set_status'):
 
+                #get the user
+                evaluation_user = User.objects.get(pk=evaluation.creator_id)
                 subject = _('Notification of change in SciELO Evaluation (Dont replay this message)')
                 from_email = 'suporte.aplicacao@scielo.org'
-                to = 'atta.jamil@gmail.com'
+                to = evaluation_user.email
 
                 current_site = Site.objects.get(id=settings.SITE_ID)
 
                 html_content = '<p><b>' +_('Hi, ') + str(evaluation.creator) + '</b></p>'
                 html_content = html_content + '<p>' + _('Your evaluation changed the status') + '</p>'
-                html_content = html_content + '<p>' + _('Please access your the evaluation: ')
-                html_content = html_content + '<a href=http://' + current_site.domain + '/evaluation/history/' + str(evaluation.id) + '>' + evaluation.journal_title + '</a></p>'
+                html_content = html_content + '<p>' + _('Please access your evaluation to see: ')
+                html_content = html_content + '<a href=http://' + current_site.domain + \
+                                            '/evaluation/history/' + str(evaluation.id) + '>' \
+                                            + evaluation.journal_title + '</a></p>'
                 html_content = html_content + '<p><b>' + _('SciELO Evaluation Team') + '</b></p>'
                 html_content = html_content + '<p>'+ _('scielo.avaliacao@scielo.org') + '</p>'
                 msg = EmailMessage(subject, html_content, from_email, [to])
