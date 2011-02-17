@@ -227,7 +227,6 @@ def new_iteration(request, object_id):
 
             if request.user.has_perm('evaluations.can_set_status'):
 
-                #get the user
                 evaluation_user = User.objects.get(pk=evaluation.creator_id)
                 subject = _('Notification of change in SciELO Evaluation (Dont replay this message)')
                 from_email = 'suporte.aplicacao@scielo.org'
@@ -242,7 +241,7 @@ def new_iteration(request, object_id):
                                             '/evaluation/history/' + str(evaluation.id) + '>' \
                                             + evaluation.journal_title + '</a></p>'
                 html_content = html_content + '<p><b>' + _('SciELO Evaluation Team') + '</b></p>'
-                html_content = html_content + '<p>'+ _('scielo.avaliacao@scielo.org') + '</p>'
+                html_content = html_content + '<p>'+ 'scielo.avaliacao@scielo.org' + '</p>'
                 msg = EmailMessage(subject, html_content, from_email, [to])
                 msg.content_subtype = "html"
                 msg.send()
