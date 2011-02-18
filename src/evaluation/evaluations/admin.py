@@ -19,7 +19,7 @@ class StatusInline(admin.StackedInline):
     model = Status
 
 class MeetingInline(admin.StackedInline):
-    model = Status
+    model = Meeting
     
 class MediaAdmin(admin.ModelAdmin):
     list_display = ('file', )
