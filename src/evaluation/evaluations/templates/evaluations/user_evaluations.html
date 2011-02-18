@@ -84,7 +84,7 @@
             {% if perms.evaluations.can_set_meeting %}
                 <td>
                     <!--id of evaluation-->
-                    <select id="{{ct.id}}">
+                    <select class="meetingSelect" id="{{ct.id}}" >
                         <!--id of meeting-->
                         <option value="0">---</option>
                         {% for me in meetings %}
