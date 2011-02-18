@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import user_passes_test
 from django.contrib.sites.models import Site
 from django.core.mail import EmailMessage
 from django.core.paginator import EmptyPage
@@ -24,6 +25,7 @@ from evaluation.evaluations.models import Followup
 from evaluation.evaluations.models import Media
 from evaluation.evaluations.models import Status
 from evaluation.evaluations.models import Type
+from evaluation.evaluations.models import Meeting
 from django.contrib.auth.models import User
 
 
@@ -108,9 +110,12 @@ def user_index(request):
 
         request.session['count_evaluations_user'] = Evaluation.objects.all().count()
         
+
+    meetings = Meeting.objects.all()
     t = loader.get_template('evaluations/user_evaluations.html')
     c = RequestContext(request, {
                        'user_evaluations': evaluations,
+                       'meetings': meetings,
                        })
     return HttpResponse(t.render(c))
 
@@ -218,7 +223,7 @@ def new_iteration(request, object_id):
 
             fw_nw = Followup(evaluation=evaluation, status=status, context=context,
                              description=desc, subject=subject,
-                             reported_by=user, to_user=user,)
+                             reported_by=user,)
 
             forms_media = MediaInlineSet(request.POST, request.FILES,
                                          instance=fw_nw)
@@ -235,8 +240,8 @@ def new_iteration(request, object_id):
                 current_site = Site.objects.get(id=settings.SITE_ID)
 
                 html_content = '<p><b>' +_('Hi, ') + str(evaluation.creator) + '</b></p>'
-                html_content = html_content + '<p>' + _('Your evaluation changed the status') + '</p>'
-                html_content = html_content + '<p>' + _('Please access your evaluation to see: ')
+                html_content = html_content + '<p>' + _('Your evaluation changed the status, ')
+                html_content = html_content +  _('please access your evaluation to see: ')
                 html_content = html_content + '<a href=http://' + current_site.domain + \
                                             '/evaluation/history/' + str(evaluation.id) + '>' \
                                             + evaluation.journal_title + '</a></p>'
@@ -337,3 +342,18 @@ def open_evaluation(request):
                               'mode': 'open_evaluation',
                               'user_name': request.user.pk},
                               context_instance=RequestContext(request))
+
+@user_passes_test(lambda u: u.has_perm('evaluations.can_set_meeting'))
+def set_meeting(request, evaluation_id, meeting_id):
+
+    if request.is_ajax():
+        evaluation = Evaluation.objects.get(pk=evaluation_id)
+
+        if meeting_id == '0':
+            evaluation.meeting_id = None
+        else:
+            evaluation.meeting_id = meeting_id
+      
+        evaluation.save()
+
+    return HttpResponse("updated")

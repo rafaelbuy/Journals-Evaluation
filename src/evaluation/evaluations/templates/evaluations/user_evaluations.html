@@ -14,6 +14,29 @@
             textExtraction: 'complex',
             headers: { 6: { sorter: false}},
         });
+
+        $(".dataTable td > select").change(function() {
+
+            $('#transationMessage').fadeIn('slow');
+            
+            $.ajax({
+             type:"GET",
+             url:"/evaluation/meeting/" + $(this).attr('id') + "/" +  $(this).val(),
+             success:function(result){
+                if(result == 'updated'){
+                    $('#transationMessage').fadeOut('slow');
+                }else{
+                    $('#transationMessage').fadeOut('slow');
+                    alert("You don't have permission to set meeting")
+                }
+             },
+             error:function(){
+                $('#transationMessage').hide();
+                $('#errorMessage').fadeIn('slow');
+            }
+         });
+        });
+     
     });
 </script>
 {% endblock %}
@@ -27,7 +50,8 @@
 {% endblock %}
 
 {% block body %}
-
+<br/>
+<span id="transationMessage" style="color:red;display:none;">{% trans 'Updating evaluation...' %}</span><span id="errorMessage" style="color:red;display:none;">{% trans 'Error while update evaluation.' %}</span>
 <div class="actions"><a href="{% url evaluation.open %}" class="addNew">{% trans 'New Ingress' %}</a></div>
 <table class="dataTable" id="table_evaluations" cellspacing="0" border="0">
     <thead>
@@ -40,7 +64,10 @@
             <th>{% trans "Description" %}</th>
             <th>{% trans "Status" %}</th>
             <th>{% trans "Creator" %}</th>
-            <th></th>
+            {% if perms.evaluations.can_set_meeting %}
+                <th>{% trans "Meeting" %}</th>
+            {% endif %}
+            <th>{% trans "Actions" %}</th>
         </tr>
     </thead>
     <tbody>
@@ -51,9 +78,21 @@
             <td class="subject">{{ ct.journal_title }}</td>
             <td class="subject">{{ ct.institution }}</td>
             <td>{{ ct.type }}</td>
-            <td width="30%">{{ ct.description }}</td>
+            <td width="25%">{{ ct.description }}</td>
             <td>{{ ct.followup_set.latest.status|default:"None" }}</td>
             <td>{{ ct.creator }}</td>
+            {% if perms.evaluations.can_set_meeting %}
+                <td>
+                    <!--id of evaluation-->
+                    <select id="{{ct.id}}">
+                        <!--id of meeting-->
+                        <option value="0">---</option>
+                        {% for me in meetings %}
+                            <option  value="{{me.id}}" {% if ct.meeting_id = me.id %} selected {% endif %}>{{me.title}} - {{me.date}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+           {% endif %}
             <td>
                 <ul>
                     <li><a class="history" href="/evaluation/history/{{ ct.pk }}/" title="{% trans 'view history' %}"><span>{% trans "view history" %}</span></a></li>

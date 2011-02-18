@@ -45,7 +45,7 @@
                 <td>{{ object.journal_title }}</td>
                 <td>{{ object.institution }}</td>
                 <td>{{ object.type }}</td>
-                <td width="30%">{{ object.description }}</td>
+                <td width="25%">{{ object.description }}</td>
                 <td><span style="color:red">{{object.followup_set.latest.status|default:"None"}}</span></td>
                 <td>{{ object.followup_set.latest.iteration_date|default:object.created }}</td>
                 <td>{{ object.creator }}</td>
@@ -86,7 +86,7 @@
             {% for fw in object.followup_set.all %}
             <tr>
                 <td>{{ fw.iteration_date }}</td>
-                <td width="30%">{{ fw.description }}</td>
+                <td width="25%">{{ fw.description }}</td>
                 <td>{{ fw.context }}</td>
                 <td><span style="color:red">{{ fw.status }}</span></td>
                 <td>

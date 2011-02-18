@@ -17,6 +17,9 @@ class ContextInline(admin.StackedInline):
     
 class StatusInline(admin.StackedInline):
     model = Status
+
+class MeetingInline(admin.StackedInline):
+    model = Status
     
 class MediaAdmin(admin.ModelAdmin):
     list_display = ('file', )
@@ -38,6 +41,10 @@ class ContextAdmin(admin.ModelAdmin):
 
 class StatusAdmin(admin.ModelAdmin):
     pass
+
+class MeetingAdmin(admin.ModelAdmin):
+    pass
+
 class EvaluationAdmin(admin.ModelAdmin):
     #list_display = ('created','context','creator')
     #$list_display_links = ('context',)
@@ -67,3 +74,7 @@ if Context not in admin.site._registry:
     
 if Status not in admin.site._registry:
     admin.site.register(Status, StatusAdmin)
+
+if Meeting not in admin.site._registry:
+    admin.site.register(Meeting, MeetingAdmin)
+

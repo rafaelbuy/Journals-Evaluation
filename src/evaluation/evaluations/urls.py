@@ -15,4 +15,5 @@ urlpatterns = patterns('',
     url(r'^list/$', login_required(object_list), info_dict, name="evaluation.list"),
     url(r'^history/(?P<object_id>\d+)/$', login_required(object_detail), info_dict, name='evaluation.history' ),
     url(r'^newiteration/(?P<object_id>\d+)/$', new_iteration, name='evaluation.new_iteration' ),
+    url(r'^meeting/(?P<evaluation_id>\d+)/(?P<meeting_id>\d+)', set_meeting, name='evaluation.set_meeting' ),
 )
