@@ -363,16 +363,16 @@ blockquote {
 .middle .mainContent {
     float: left;
     margin-right: 4em;
-    padding-right: 2em;
+    /*padding-right: 2em;*/
     min-height: 349px;
-	margin-left: 76px;
+    margin-left: 76px;
 }
 
 .wide .middle .mainContent {
     border:medium none;
     float:left;
-    margin-left:76px;
-    width:90%;
+    margin-left:20px;
+    width:98%;
 }
 
 .mainContent .warning {
