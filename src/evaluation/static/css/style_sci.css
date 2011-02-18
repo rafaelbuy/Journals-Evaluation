@@ -891,6 +891,8 @@ legend{
     float:right;
 }
 
-.pagination a{
-    
+/*meeting select*/
+
+.meetingSelect{
+    width:154px;
 }
