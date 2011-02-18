@@ -79,7 +79,7 @@
             <td class="subject">{{ ct.institution }}</td>
             <td>{{ ct.type }}</td>
             <td width="25%">{{ ct.description }}</td>
-            <td>{{ ct.followup_set.latest.status|default:"None" }}</td>
+            <td width="15%">{{ ct.followup_set.latest.status|default:"None" }}</td>
             <td>{{ ct.creator }}</td>
             {% if perms.evaluations.can_set_meeting %}
                 <td>
