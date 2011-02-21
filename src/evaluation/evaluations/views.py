@@ -112,6 +112,7 @@ def user_index(request):
         
 
     meetings = Meeting.objects.all()
+    
     t = loader.get_template('evaluations/user_evaluations.html')
     c = RequestContext(request, {
                        'user_evaluations': evaluations,
@@ -144,11 +145,13 @@ def search(request):
     except (EmptyPage, InvalidPage):
         evaluations = paginator.page(paginator.num_pages)
 
+    meetings = Meeting.objects.all()
     t = loader.get_template('evaluations/user_evaluations.html')
     c = RequestContext(request, {
                        'user_evaluations': evaluations,
                        'search': True,
-                       'q':q
+                       'q':q,
+                       'meetings': meetings,
                        })
     return HttpResponse(t.render(c))
 
