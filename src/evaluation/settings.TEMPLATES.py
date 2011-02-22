@@ -90,6 +90,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -97,6 +98,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.locale.LocaleMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
+
 )
 
 ROOT_URLCONF = 'evaluation.urls'
@@ -145,4 +148,12 @@ FIXTURE_DIRS = ('fixtures',)
 
 INTERNAL_IPS = ('127.0.0.1',)
 
+#Debug Toolbar
+
 DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False}
+
+#Cache
+
+CACHE_BACKEND = "memcached://127.0.0.1:11211/?timeout=60"
+
+CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True 
